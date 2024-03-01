@@ -17,7 +17,7 @@
         </li>
         @can('index-user')
         <li class="nav-item dropdown">
-            <a href="{{ route('user.index') }}" class="nav-link"><i class="fas fa-users"></i><span>Rekap Kompen</span></a>
+            <a href="{{ route('user.index') }}" class="nav-link"><i class="fas fa-users"></i><span>User List</span></a>
             
         </li>
         @endcan
