@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RekapController;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Routing\RouteGroup;
@@ -33,6 +34,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 Route::resource('user', UserController::class);
+Route::resource('rekap', RekapController::class);
 
 //Route::get('/baru', function () {
  //   return view('dashboard.baru');
