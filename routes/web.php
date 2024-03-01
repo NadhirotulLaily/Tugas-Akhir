@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TugasController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RekapController;
 use GuzzleHttp\Middleware;
@@ -35,6 +36,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::resource('user', UserController::class);
 Route::resource('rekap', RekapController::class);
+Route::resource('tugas', TugasController::class);
 
 //Route::get('/baru', function () {
  //   return view('dashboard.baru');
