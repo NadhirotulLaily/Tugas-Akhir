@@ -21,7 +21,10 @@
             
         </li>
         @endcan
-       
+        <li class="nav-item dropdown">
+            <a href="{{ route('rekap.index') }}" class="nav-link"><i class="fas fa-book"></i><span>Rekap Kompen</span></a>
+            
+        </li>
         @show
     </ul>
 
