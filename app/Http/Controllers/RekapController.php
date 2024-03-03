@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\rekap;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RekapController extends Controller
 {
@@ -12,10 +13,16 @@ class RekapController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return view('rekap.index');
+        $rekap = DB::table('rekap')
+        ->when($request->input('search'),function ($query, $search){
+            $query->where('nama','like','%'.$search.'%')
+            ->orWhere('semester','like','%'.$search.'%');
+        })
+        ->paginate(5);
+        return view ('rekap.index', compact ('rekap'));
     }
 
     /**

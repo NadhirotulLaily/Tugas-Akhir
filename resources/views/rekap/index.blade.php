@@ -39,20 +39,19 @@
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <tr>
-                        <th >
-                          No
-                        </th>
+                        <th>No</th>
                         <th>Nama</th>
-                        <th>Kelas</th>
-                        <th>Semester</th>
                         <th>NIM</th>
+                        <th>Semester</th>
                         <th>Kompen</th>
+                        <th>Opsi</th>
                       </tr>
+                      @forelse ($rekap as $index => $rekap )
                       <tr>
                         <td>
-                          1
+                            1
                         </td>
-                        <td>Laravel 5 Tutorial: Introduction
+                        <td>{{ $rekap->nama }}
                           <div class="table-links">
                             <a href="#">View</a>
                             <div class="bullet"></div>
@@ -62,43 +61,29 @@
                           </div>
                         </td>
                         <td>
-                          <a href="#">Web Developer</a>,
-                          <a href="#">Tutorial</a>
+                          {{ $rekap->nim }}
                         </td>
                         <td>
-                          <a href="#">
-                            <img alt="image" src="../assets/img/avatar/avatar-5.png" class="rounded-circle" width="35" data-toggle="title" title=""> <div class="d-inline-block ml-1">Rizal Fakhri</div>
-                          </a>
+                          {{ $rekap->semester }}
                         </td>
-                        <td>2018-01-20</td>
-                        <td><div class="badge badge-primary">Published</div></td>
+                        <td>
+                          {{ $rekap->kompen }}
+                        </td>
+                        <td></td>
                       </tr>
+                      @empty
+                      <tr>
+                        <td>
+                            No Data Found
+                        </td>
+                      </tr>
+                      @endforelse
+                      
                     </table>
                   </div>
                   <div class="float-right">
                     <nav>
                       <ul class="pagination">
-                        <li class="page-item disabled">
-                          <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                          </a>
-                        </li>
-                        <li class="page-item active">
-                          <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                          </a>
-                        </li>
                       </ul>
                     </nav>
                   </div>
