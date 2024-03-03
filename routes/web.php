@@ -31,11 +31,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('edit-profile', function () {
         return view('dashboard.profile');
     })->name('profile.edit');
+    Route::resource('rekap', RekapController::class);
 });
 
 
 Route::resource('user', UserController::class);
-Route::resource('rekap', RekapController::class);
+
 Route::resource('tugas', TugasController::class);
 
 //Route::get('/baru', function () {
