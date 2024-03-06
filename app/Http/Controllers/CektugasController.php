@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tugas;
+use App\Models\cektugas;
 use Illuminate\Http\Request;
 
-class TugasController extends Controller
+class CektugasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class TugasController extends Controller
     public function index()
     {
         //
-        return view('tugas.index');
+        return view('cektugas.index');
     }
 
     /**
@@ -42,10 +42,10 @@ class TugasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\tugas  $tugas
+     * @param  \App\Models\cektugas  $cektugas
      * @return \Illuminate\Http\Response
      */
-    public function show(tugas $tugas)
+    public function show(cektugas $cektugas)
     {
         //
     }
@@ -53,10 +53,10 @@ class TugasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\tugas  $tugas
+     * @param  \App\Models\cektugas  $cektugas
      * @return \Illuminate\Http\Response
      */
-    public function edit(tugas $tugas)
+    public function edit(cektugas $cektugas)
     {
         //
     }
@@ -65,10 +65,10 @@ class TugasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\tugas  $tugas
+     * @param  \App\Models\cektugas  $cektugas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, tugas $tugas)
+    public function update(Request $request, cektugas $cektugas)
     {
         //
     }
@@ -76,10 +76,10 @@ class TugasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\tugas  $tugas
+     * @param  \App\Models\cektugas  $cektugas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(tugas $tugas)
+    public function destroy(cektugas $cektugas)
     {
         //
     }
