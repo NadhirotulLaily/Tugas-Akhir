@@ -20,10 +20,11 @@
               <div class="card">
                 <div class="card-header">
                   <h4>All Posts</h4>
+                  
                 </div>
                 <div class="card-body">
-                  <div class="float-right">
-                    
+                  <div class="float-right"> 
+                    <a href="" class="btn btn-primary">Tambah</a> 
                   </div>
 
                   <div class="clearfix mb-3"></div>
@@ -44,19 +45,36 @@
                           1
                         </td>
                         <td>Install Aplikasi
-                          <div class="table-links">
-                            <a href="#">View</a>
-                            <div class="bullet"></div>
-                            <a href="#">Edit</a>
-                            <div class="bullet"></div>
-                            <a href="#" class="text-danger">Trash</a>
-                          </div>
                         </td>
                         <td>
                           <a href="#">4 Jam</a>
                         </td>
                         <td>
-                          <div class="badge badge-warning">Available</div>
+                          <div class="badge badge-warning">available</div>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                          <a href="#"
+                            class="btn btn-sm btn-info btn-icon "><i
+                                class="fas fa-edit"></i>
+                            Edit</a>
+                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
+                              <i class="fas fa-times"></i> Delete </button>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          2
+                        </td>
+                        <td>
+                          Menerjemahkan Jurnal
+                        </td>
+                        <td>
+                          <a href="#">8 Jam</a>
+                        </td>
+                        <td>
+                          <div class="badge badge-warning">Unavailable</div>
                         </td>
                         <td>
                           <a href="{{ route('cektugas.index') }}"

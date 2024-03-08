@@ -22,7 +22,7 @@
                   <h4>All Posts</h4>
                 </div>
                 <div class="card-body">
-                  
+                  <a href="" class="btn btn-primary">Tambah</a> 
                   <div class="float-right">
                     <form>
                       <div class="input-group">
@@ -69,7 +69,14 @@
                         <td>
                           {{ $rekap->kompen }}
                         </td>
-                        <td></td>
+                        <td>
+                          <a href="#"
+                            class="btn btn-sm btn-info btn-icon "><i
+                                class="fas fa-edit"></i>
+                            Edit</a>
+                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
+                              <i class="fas fa-times"></i> Delete </button>
+                        </td>
                       </tr>
                       @empty
                       <tr>

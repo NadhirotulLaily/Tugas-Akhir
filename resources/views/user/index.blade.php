@@ -6,7 +6,7 @@
 
 <section class="section">
           <div class="section-header">
-            <h1>Rekap Kompen</h1>
+            <h1>User List</h1>
           </div>
 
           <div class="section-body">
@@ -22,7 +22,6 @@
                   <h4>All Posts</h4>
                 </div>
                 <div class="card-body">
-                  
                   <div class="float-right">
                     <form method="GET">
                       <div class="input-group">

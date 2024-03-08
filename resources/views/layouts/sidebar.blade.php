@@ -1,6 +1,6 @@
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-        <a href="index.html">Stisla</a>
+        <a href="index.html">SIKOMA-TI</a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
         <a href="index.html">St</a>

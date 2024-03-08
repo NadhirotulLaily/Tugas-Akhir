@@ -48,13 +48,6 @@
                           1
                         </td>
                         <td>Install Aplikasi
-                          <div class="table-links">
-                            <a href="#">View</a>
-                            <div class="bullet"></div>
-                            <a href="#">Edit</a>
-                            <div class="bullet"></div>
-                            <a href="#" class="text-danger">Trash</a>
-                          </div>
                         </td>
                         <td>
                           <a href="#">4 Jam</a>
