@@ -22,7 +22,7 @@
                   <h4>All Posts</h4>
                 </div>
                 <div class="card-body">
-                  <a href="" class="btn btn-primary">Tambah</a> 
+                  <a href="{{ route('input.rekap') }}" class="btn btn-primary">Tambah</a> 
                   <div class="float-right">
                     <form>
                       <div class="input-group">

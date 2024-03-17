@@ -38,6 +38,7 @@
                         <th>No</th>
                         <th>Tugas</th>
                         <th>Waktu</th>
+                        <th>Bukti</th>
                         <th>Verifikasi</th>
                         <th>Status</th>
                         <th>Opsi</th>
@@ -53,9 +54,13 @@
                           <a href="#">4 Jam</a>
                         </td>
                         <td>
-                          <i class="fas fa-solid fa-check"></i>
-                          <i class="fas fa-regular fa-circle-xmark"></i>
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gambarModal">Lihat Gambar</button>
                         </td>
+                        <td>
+                          <button class="btn btn-success" disabled><i class="fas fa-check"></i></button>
+                          <button class="btn btn-danger" disabled><i class="fas fa-times"></i></button>
+                      </td>
+                      
                         <td>
                           <div class="badge badge-warning">Pending</div>
                         </td>

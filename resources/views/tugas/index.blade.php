@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-body">
                   <div class="float-right"> 
-                    <a href="" class="btn btn-primary">Tambah</a> 
+                    <a href="{{ route('tambah.tugas') }}" class="btn btn-primary">Tambah</a> 
                   </div>
 
                   <div class="clearfix mb-3"></div>

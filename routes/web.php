@@ -33,6 +33,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard.profile');
     })->name('profile.edit');
     Route::resource('rekap', RekapController::class);
+
+    Route::get('/tambah-tugas', function () {
+        return view('tugas.tambah');
+    })->name('tambah.tugas');    
+
+    Route::get('/input-rekap', function () {
+        return view('rekap.input');
+    })->name('input.rekap'); 
+    
 });
 
 
