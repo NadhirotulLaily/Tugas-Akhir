@@ -34,29 +34,28 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('profile.edit');
     
 
-    Route::get('/tambah-tugas', function () {
-        return view('tugas.tambah');
-    })->name('tambah.tugas');    
-
+       
+    // Rekap
     Route::get('/input-rekap', function () {
         return view('rekap.input');
     })->name('input.rekap'); 
-    
-    // Route untuk menampilkan form input rekap (create)
-Route::get('/rekap', [RekapController::class, 'index'])->name('rekap.index');
-Route::get('/input-rekap', [RekapController::class, 'create'])->name('input.rekap');
-Route::get('/input-rekap/delete/{id}', [RekapController::class, 'destroy'])->name('rekap.delete');
+    Route::get('/rekap', [RekapController::class, 'index'])->name('rekap.index');
+    Route::get('/input-rekap', [RekapController::class, 'create'])->name('input.rekap');
+    Route::get('/input-rekap/delete/{id}', [RekapController::class, 'destroy'])->name('rekap.delete');
+    Route::post('/input-rekap/store', [RekapController::class, 'store'])->name('rekap.store');
+    Route::get('/rekap/{id}/edit', [RekapController::class, 'edit'])->name('rekap.edit');
+    Route::put('/rekap/{id}/update', [RekapController::class, 'update'])->name('rekap.update');
 
 
-// Route untuk menangani penyimpanan data rekap (store)
-Route::post('/input-rekap/store', [RekapController::class, 'store'])->name('rekap.store');
+    // Tugas
+    Route::get('/tambah-tugas', function () {
+        return view('tugas.tambah');
+    })->name('tambah.tugas'); 
 });
 
 
 Route::resource('user', UserController::class);
 
-Route::resource('tugas', TugasController::class);
-Route::resource('cektugas', CektugasController::class);
 
 
 //Route::get('/baru', function () {
