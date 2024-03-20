@@ -49,16 +49,9 @@
                       @forelse ($rekap as $index => $rekap )
                       <tr>
                         <td>
-                            1
+                          {{ $loop->index + 1 }}
                         </td>
                         <td>{{ $rekap->nama }}
-                          <div class="table-links">
-                            <a href="#">View</a>
-                            <div class="bullet"></div>
-                            <a href="#">Edit</a>
-                            <div class="bullet"></div>
-                            <a href="#" class="text-danger">Trash</a>
-                          </div>
                         </td>
                         <td>
                           {{ $rekap->nim }}
@@ -74,8 +67,9 @@
                             class="btn btn-sm btn-info btn-icon "><i
                                 class="fas fa-edit"></i>
                             Edit</a>
-                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
-                              <i class="fas fa-times"></i> Delete </button>
+
+                            <a href="/input-rekap/delete/{{ $rekap->id }}"  class="btn btn-sm btn-danger btn-icon confirm-delete">
+                              <i class="fas fa-times"></i> Delete </a>
                         </td>
                       </tr>
                       @empty
@@ -90,8 +84,8 @@
                   </div>
                   <div class="float-right">
                     <nav>
-                      <ul class="pagination">
-                      </ul>
+                      {{-- <ul class="pagination">
+                      </ul> --}}
                     </nav>
                   </div>
                 </div>
