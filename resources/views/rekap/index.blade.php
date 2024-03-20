@@ -63,7 +63,7 @@
                           {{ $rekap->kompen }}
                         </td>
                         <td>
-                          <a href="#"
+                          <a href="{{ route('rekap.edit', $rekap->id) }}"
                             class="btn btn-sm btn-info btn-icon "><i
                                 class="fas fa-edit"></i>
                             Edit</a>

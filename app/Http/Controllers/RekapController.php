@@ -50,8 +50,6 @@ class RekapController extends Controller
             'kompen' => 'required|integer',
         ]);
     
-        
-            // Gunakan model Eloquent untuk menyimpan data ke database
             $rekap = new Rekap();
             $rekap->nama = $request->input('nama');
             $rekap->nim = $request->input('nim');
@@ -80,9 +78,10 @@ class RekapController extends Controller
      * @param  \App\Models\rekap  $rekap
      * @return \Illuminate\Http\Response
      */
-    public function edit(rekap $rekap)
+    public function edit($id)
     {
-        //
+        $rekap = Rekap::findOrFail($id);
+        return view('rekap.edit', compact('rekap'));
     }
 
     /**
@@ -92,10 +91,34 @@ class RekapController extends Controller
      * @param  \App\Models\rekap  $rekap
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, rekap $rekap)
+    public function update(Request $request, $id)
     {
-        //
-    }
+        // Validasi data yang dikirim dari form
+        $validatedData = $request->validate([
+            'nama' => 'required|max:45',
+            'nim' => 'required|max:45',
+            'semester' => 'required|max:45',
+            'kompen' => 'required|integer',
+        ]);
+
+        
+            
+        try {
+            $rekap = Rekap::findOrFail($id);
+            
+            $rekap->update([
+                'nama' => $request->nama,
+                'nim' => $request->nim,
+                'semester' => $request->semester,
+                'kompen' => $request->kompen,
+            ]);
+    
+            return redirect()->route('rekap.index')->with('success', 'Data rekap berhasil diperbarui.');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
+        }
+    
 
     /**
      * Remove the specified resource from storage.
