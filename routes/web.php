@@ -48,6 +48,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     // Tugas
+    Route::resource('tugas', UserController::class);
     Route::get('/tambah-tugas', function () {
         return view('tugas.tambah');
     })->name('tambah.tugas'); 
