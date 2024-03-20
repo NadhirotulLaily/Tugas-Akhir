@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\rekap;
+use App\Models\Rekap;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,7 +21,7 @@ class RekapController extends Controller
             $query->where('nama','like','%'.$search.'%')
             ->orWhere('semester','like','%'.$search.'%');
         })
-        ->paginate(5);
+        ->paginate(10);
         return view ('rekap.index', compact ('rekap'));
     }
 
@@ -32,7 +32,7 @@ class RekapController extends Controller
      */
     public function create()
     {
-        //
+        return view('rekap.input');
     }
 
     /**
@@ -43,7 +43,24 @@ class RekapController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|max:45',
+            'nim' => 'required|max:45',
+            'semester' => 'required|max:45',
+            'kompen' => 'required|integer',
+        ]);
+    
+        
+            // Gunakan model Eloquent untuk menyimpan data ke database
+            $rekap = new Rekap();
+            $rekap->nama = $request->input('nama');
+            $rekap->nim = $request->input('nim');
+            $rekap->semester = $request->input('semester');
+            $rekap->kompen = $request->input('kompen');
+            $rekap->save();
+    
+            return redirect()->route('rekap.index')->with('success', 'Data rekap berhasil ditambahkan.');
+        
     }
 
     /**
@@ -86,8 +103,11 @@ class RekapController extends Controller
      * @param  \App\Models\rekap  $rekap
      * @return \Illuminate\Http\Response
      */
-    public function destroy(rekap $rekap)
+    public function destroy($id)
     {
-        //
-    }
+        
+         DB::table('rekap')->where('id',$id)->delete();
+         return redirect()->route('rekap.index');
+        } 
+    
 }

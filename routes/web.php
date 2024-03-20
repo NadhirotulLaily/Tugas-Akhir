@@ -32,7 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('edit-profile', function () {
         return view('dashboard.profile');
     })->name('profile.edit');
-    Route::resource('rekap', RekapController::class);
+    
 
     Route::get('/tambah-tugas', function () {
         return view('tugas.tambah');
@@ -42,6 +42,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('rekap.input');
     })->name('input.rekap'); 
     
+    // Route untuk menampilkan form input rekap (create)
+Route::get('/rekap', [RekapController::class, 'index'])->name('rekap.index');
+Route::get('/input-rekap', [RekapController::class, 'create'])->name('input.rekap');
+Route::get('/input-rekap/delete/{id}', [RekapController::class, 'destroy'])->name('rekap.delete');
+
+
+// Route untuk menangani penyimpanan data rekap (store)
+Route::post('/input-rekap', [RekapController::class, 'store'])->name('input.rekap.store');
 });
 
 
