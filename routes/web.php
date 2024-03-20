@@ -49,7 +49,7 @@ Route::get('/input-rekap/delete/{id}', [RekapController::class, 'destroy'])->nam
 
 
 // Route untuk menangani penyimpanan data rekap (store)
-Route::post('/input-rekap', [RekapController::class, 'store'])->name('input.rekap.store');
+Route::post('/input-rekap/store', [RekapController::class, 'store'])->name('rekap.store');
 });
 
 
