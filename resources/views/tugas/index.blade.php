@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-body">
                   <div class="float-right"> 
-                    <a href="{{ route('tambah.tugas') }}" class="btn btn-primary">Tambah</a> 
+                    <a href="{{ route('input.tugas') }}" class="btn btn-primary">Tambah</a> 
                   </div>
 
                   <div class="clearfix mb-3"></div>
@@ -32,90 +32,43 @@
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <tr>
-                        <th>No</th>
-                        <th>Tugas</th>
-                        <th>Waktu</th>
-                        <th>Status</th>
-                        <th>Verifikasi</th>
-                        <th>Action</th>
+                          <th>No</th>
+                          <th>Tugas</th>
+                          <th>Waktu</th>
+                          <th>Status</th>
+                          <th>Action</th>
                       </tr>
-                                  
+                      
+                      @forelse ($tugas as $index => $tugasItem )
                       <tr>
-                        <td>
-                          1
-                        </td>
-                        <td>Install Aplikasi
-                        </td>
-                        <td>
-                          <a href="#">4 Jam</a>
-                        </td>
-                        <td>
-                          <div class="badge badge-warning">available</div>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                          <a href="#"
-                            class="btn btn-sm btn-info btn-icon "><i
-                                class="fas fa-edit"></i>
-                            Edit</a>
-                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
-                              <i class="fas fa-times"></i> Delete </button>
+                          <td>
+                              {{ $loop->index + 1 }}
+                          </td>
+                          <td>{{ $tugasItem->tugas }}</td>
+                          <td>{{ $tugasItem->waktu }}</td>
+                          <td>{{ $tugasItem->status }}</td>
+                          <td>
+                              <a href="{{ route('tugas.edit', $tugasItem->id) }}" class="btn btn-sm btn-info btn-icon"><i class="fas fa-edit"></i> Edit</a>
+                              <a href="/input-tugas/delete/{{ $tugasItem->id }}" class="btn btn-sm btn-danger btn-icon confirm-delete"><i class="fas fa-times"></i> Delete</a>
+                              
+                              @if ($tugasItem->status == 'available')
+                                  <a href="" class="btn btn-sm btn-info btn-icon">Cek Tugas</a>
+                              @endif
+                          </td>
                       </tr>
-
+                      @empty
                       <tr>
-                        <td>
-                          2
-                        </td>
-                        <td>
-                          Menerjemahkan Jurnal
-                        </td>
-                        <td>
-                          <a href="#">8 Jam</a>
-                        </td>
-                        <td>
-                          <div class="badge badge-warning">Unavailable</div>
-                        </td>
-                        <td>
-                          <a href=""
-                            class="btn btn-sm btn-info btn-icon ">
-                            Cek Tugas</a>
-                        </td>
-                        <td>
-                          <a href="#"
-                            class="btn btn-sm btn-info btn-icon "><i
-                                class="fas fa-edit"></i>
-                            Edit</a>
-                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
-                              <i class="fas fa-times"></i> Delete </button>
+                          <td colspan="5">No Data Found</td>
                       </tr>
-                    </table>
+                      @endforelse
+                  </table>
+                  
                   </div>
                   <div class="float-right">
                     <nav>
-                      <ul class="pagination">
-                        <li class="page-item disabled">
-                          <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                          </a>
-                        </li>
-                        <li class="page-item active">
-                          <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                          </a>
-                        </li>
-                      </ul>
+                      {{-- <ul class="pagination">
+                        
+                      </ul> --}}
                     </nav>
                   </div>
                 </div>

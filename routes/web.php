@@ -48,10 +48,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     // Tugas
+    Route::get('/input-tugas', function () {
+        return view('tugas.input');
+    })->name('input.tugas'); 
+    Route::get('/tugas', [TugasController::class, 'index'])->name('tugas.index');
+    Route::get('/input-tugas', [TugasController::class, 'create'])->name('input.tugas');
+    Route::post('/input-tugas/store', [TugasController::class, 'store'])->name('tugas.store');
+    Route::get('/tugas/{id}/edit', [TugasController::class, 'edit'])->name('tugas.edit');
+    Route::put('/tugas/{id}/update', [TugasController::class, 'update'])->name('tugas.update');
+    Route::get('/input-tugas/delete/{id}', [TugasController::class, 'destroy'])->name('tugas.delete');
+
     Route::resource('tugas', TugasController::class);
-    Route::get('/tambah-tugas', function () {
-        return view('tugas.tambah');
-    })->name('tambah.tugas'); 
+    
 });
 
 

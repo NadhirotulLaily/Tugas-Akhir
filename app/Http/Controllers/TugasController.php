@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tugas;
+use App\Models\Tugas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TugasController extends Controller
 {
@@ -12,10 +13,16 @@ class TugasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        return view('tugas.index');
+        $tugas = DB::table('tugas')
+        ->when($request->input('search'),function ($query, $search){
+            $query->where('nama','like','%'.$search.'%')
+            ->orWhere('semester','like','%'.$search.'%');
+        })
+        ->paginate(10);
+        return view ('tugas.index', compact ('tugas'));
     }
 
     /**
@@ -25,7 +32,7 @@ class TugasController extends Controller
      */
     public function create()
     {
-        //
+        return view('tugas.input');
     }
 
     /**
@@ -36,7 +43,19 @@ class TugasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'tugas' => 'required|max:45',
+            'waktu' => 'required|integer',
+            'status' => 'required|in:available,unavailable',
+        ]);
+
+        $tugas = new Tugas();
+        $tugas->tugas = $validatedData['tugas'];
+        $tugas->waktu = $validatedData['waktu'];
+        $tugas->status = $validatedData['status'];
+        $tugas->save();
+
+        return redirect()->route('tugas.index')->with('success', 'Tugas berhasil dibuat.');
     }
 
     /**
@@ -56,9 +75,10 @@ class TugasController extends Controller
      * @param  \App\Models\tugas  $tugas
      * @return \Illuminate\Http\Response
      */
-    public function edit(tugas $tugas)
+    public function edit($id)
     {
-        //
+        $tugas = Tugas::findOrFail($id);
+        return view('tugas.edit', compact('tugas'));
     }
 
     /**
@@ -68,9 +88,29 @@ class TugasController extends Controller
      * @param  \App\Models\tugas  $tugas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, tugas $tugas)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'tugas' => 'required|max:45',
+            'waktu' => 'required|integer',
+            'status' => 'required|in:available,unavailable',
+        ]);
+
+        
+            
+        try {
+            $tugas = Tugas::findOrFail($id);
+            
+            $tugas->update([
+                'tugas' => $request->tugas,
+                'waktu' => $request->waktu,
+                'status' => $request->status,
+            ]);
+    
+            return redirect()->route('tugas.index')->with('success', 'Data tugas berhasil diperbarui.');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -79,8 +119,9 @@ class TugasController extends Controller
      * @param  \App\Models\tugas  $tugas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(tugas $tugas)
+    public function destroy($id)
     {
-        //
+        DB::table('tugas')->where('id',$id)->delete();
+        return redirect()->route('tugas.index');
     }
 }

@@ -18,27 +18,23 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <form action="" method="POST">
+          <form action="{{ route('tugas.store') }}" method="POST">
             @csrf
             <div class="form-group">
               <label for="tugas">Tugas</label>
               <input type="text" name="tugas" id="tugas" class="form-control" placeholder="Masukkan Judul Tugas">
             </div>
             <div class="form-group">
-              <label for="deskripsi_tugas">Deskripsi</label>
-              <textarea type="text" name="deskripsi_tugas" id="deskripsi_tugas" class="form-control" rows ="5" style="min-height: 100px; overflow: hidden;" placeholder="Masukkan Deskripsi Tugas" required></textarea>
-            </div>
-            <div class="form-group">
               <label for="waktu">Waktu</label>
-              <select name="status" id="status" class="form-control">
-                <option value="satu">1</option>
-                <option value="dua">2</option>
-                <option value="satu">3</option>
-                <option value="dua">4</option>
-                <option value="satu">5</option>
-                <option value="dua">6</option>
-                <option value="satu">7</option>
-                <option value="dua">8</option>
+              <select name="waktu" id="waktu" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
               </select>
             </div>
             <div class="form-group">
