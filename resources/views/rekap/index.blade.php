@@ -44,7 +44,7 @@
                         <th>NIM</th>
                         <th>Semester</th>
                         <th>Kompen</th>
-                        <th>Opsi</th>
+                        <th>Action</th>
                       </tr>
                       @forelse ($rekap as $index => $rekap )
                       <tr>
@@ -85,6 +85,7 @@
                   <div class="float-right">
                     <nav>
                       {{-- <ul class="pagination">
+                        
                       </ul> --}}
                     </nav>
                   </div>

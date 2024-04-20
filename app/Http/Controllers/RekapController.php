@@ -93,7 +93,7 @@ class RekapController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validasi data yang dikirim dari form
+        
         $validatedData = $request->validate([
             'nama' => 'required|max:45',
             'nim' => 'required|max:45',
