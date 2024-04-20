@@ -40,8 +40,6 @@
                         <th>Waktu</th>
                         <th>Bukti</th>
                         <th>Verifikasi</th>
-                        <th>Status</th>
-                        <th>Opsi</th>
                       </tr>
                                   
                       <tr>
@@ -60,17 +58,7 @@
                           <button class="btn btn-success" disabled><i class="fas fa-check"></i></button>
                           <button class="btn btn-danger" disabled><i class="fas fa-times"></i></button>
                       </td>
-                      
-                        <td>
-                          <div class="badge badge-warning">Pending</div>
-                        </td>
-                        <td>
-                          <a href="#"
-                            class="btn btn-sm btn-info btn-icon "><i
-                                class="fas fa-edit"></i>
-                            Edit</a>
-                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
-                              <i class="fas fa-times"></i> Delete </button>
+                    
                       </tr>
                     </table>
                   </div>
