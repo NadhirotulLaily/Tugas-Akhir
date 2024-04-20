@@ -40,9 +40,9 @@
                       <tr>
                         <th>No</th>
                         <th>Nama</th>
-                        <th>NIM</th>
-                        <th>Semester</th>
-                        <th>Kompen</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Active</th>
                         <th>Opsi</th>
                       </tr>
                       @forelse ($users as $index => $user )

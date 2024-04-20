@@ -37,7 +37,7 @@
                         <th>Waktu</th>
                         <th>Status</th>
                         <th>Verifikasi</th>
-                        <th>Opsi</th>
+                        <th>Action</th>
                       </tr>
                                   
                       <tr>
@@ -77,7 +77,7 @@
                           <div class="badge badge-warning">Unavailable</div>
                         </td>
                         <td>
-                          <a href="{{ route('cektugas.index') }}"
+                          <a href=""
                             class="btn btn-sm btn-info btn-icon ">
                             Cek Tugas</a>
                         </td>
