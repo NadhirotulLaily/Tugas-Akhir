@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Rekap;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class RekapController extends Controller
 {

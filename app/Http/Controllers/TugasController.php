@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class TugasController extends Controller
 {
@@ -15,6 +16,7 @@ class TugasController extends Controller
      */
     public function index(Request $request)
     {
+        
         //
         $tugas = DB::table('tugas')
         ->when($request->input('search'),function ($query, $search){

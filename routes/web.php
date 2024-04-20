@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PilihtugasController;
 use App\Http\Controllers\CektugasController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\UserController;
@@ -60,6 +61,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('tugas', TugasController::class);
     
+
+    //Pilih Tugas
+    Route::get('/pilih-tugas', [PilihtugasController::class, 'index'])->name('pilihtugas.index');
+    Route::get('/upload-tugas', [PilihtugasController::class, 'showUploadForm'])->name('pilihtugas.upload');
+    Route::post('/upload-tugas', [PilihtugasController::class, 'upload'])->name('pilihtugas.upload.submit');
+
 });
 
 

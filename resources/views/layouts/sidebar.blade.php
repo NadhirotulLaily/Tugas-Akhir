@@ -23,16 +23,26 @@
         @can('index-user')
         <li class="nav-item dropdown">
             <a href="{{ route('user.index') }}" class="nav-link"><i class="fas fa-users"></i><span>User List</span></a>
-            
         </li>
         @endcan
+        
+        @can('index-rekap')
         <li class="nav-item dropdown">
             <a href="{{ route('rekap.index') }}" class="nav-link"><i class="fas fa-book"></i><span>Rekap Kompen</span></a>
-            
         </li>
+        @endcan
+
+        @can('index-rekap')
         <li class="nav-item dropdown">
             <a href="{{ route('tugas.index') }}" class="nav-link"><i class="fas fa-solid fa-list"></i><span>Tugas</span></a>
         </li>
+        @endcan
+        
+        @can('pilih-tugas')
+        <li class="nav-item dropdown">
+            <a href="{{ route('pilihtugas.index') }}" class="nav-link"><i class="fas fa-solid fa-list"></i><span>Pilih Tugas</span></a>
+        </li>
+        @endcan
 
         @show
 
