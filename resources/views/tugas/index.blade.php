@@ -52,7 +52,7 @@
                               <a href="/input-tugas/delete/{{ $tugasItem->id }}" class="btn btn-sm btn-danger btn-icon confirm-delete"><i class="fas fa-times"></i> Delete</a>
                               
                               @if ($tugasItem->status == 'available')
-                                  <a href="" class="btn btn-sm btn-info btn-icon">Cek Tugas</a>
+                                  <a href="{{ route('cektugas.index') }}" class="btn btn-sm btn-info btn-icon">Cek Tugas</a>
                               @endif
                           </td>
                       </tr>

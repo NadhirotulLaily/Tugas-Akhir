@@ -59,6 +59,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/input-tugas/delete/{id}', [TugasController::class, 'destroy'])->name('tugas.delete');
 
     Route::resource('tugas', TugasController::class);
+
+    // Cek Tugas
+    Route::get('/cektugas', [CektugasController::class, 'index'])->name('cektugas.index');
+
+    
     
 });
 
