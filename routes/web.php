@@ -48,7 +48,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     // Tugas
-    Route::resource('tugas', UserController::class);
+    Route::resource('tugas', TugasController::class);
+    Route::get('/cek-tugas', function () {
+        return view('cektugas.index');
+    })->name('cektugas.index');
     Route::get('/tambah-tugas', function () {
         return view('tugas.tambah');
     })->name('tambah.tugas'); 
