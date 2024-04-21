@@ -22,7 +22,9 @@
                   <h4>All Posts</h4>
                 </div>
                 <div class="card-body">
+                  @can('index-user')
                   <a href="{{ route('input.rekap') }}" class="btn btn-primary">Tambah</a> 
+                  @endcan
                   <div class="float-right">
                     <form>
                       <div class="input-group">
@@ -44,7 +46,9 @@
                         <th>NIM</th>
                         <th>Semester</th>
                         <th>Kompen</th>
+                        @can('index-user')
                         <th>Action</th>
+                        @endcan
                       </tr>
                       @forelse ($rekap as $index => $rekap )
                       <tr>
@@ -62,6 +66,7 @@
                         <td>
                           {{ $rekap->kompen }}
                         </td>
+                        @can('index-user')
                         <td>
                           <a href="{{ route('rekap.edit', $rekap->id) }}"
                             class="btn btn-sm btn-info btn-icon "><i
@@ -71,6 +76,7 @@
                             <a href="/input-rekap/delete/{{ $rekap->id }}"  class="btn btn-sm btn-danger btn-icon confirm-delete">
                               <i class="fas fa-times"></i> Delete </a>
                         </td>
+                        @endcan
                       </tr>
                       @empty
                       <tr>
