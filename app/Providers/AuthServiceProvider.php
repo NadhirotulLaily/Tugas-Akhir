@@ -14,8 +14,7 @@ class AuthServiceProvider extends ServiceProvider
         'index-user' => ['superadmin'],
         'index-rekap' => ['superadmin', 'user'],
         'index-admin'=> ['admin'],
-        'pilih-tugas' => ['user'],
-        ''
+        'index-tugas' => ['user'],
         
 
     ];

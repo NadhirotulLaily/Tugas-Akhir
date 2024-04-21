@@ -38,10 +38,12 @@
         </li>
         @endcan
         
-        @can('pilih-tugas')
+        @can('index-tugas')
+        @if(auth()->user()->role == 'user')
         <li class="nav-item dropdown">
             <a href="{{ route('pilihtugas.index') }}" class="nav-link"><i class="fas fa-solid fa-list"></i><span>Pilih Tugas</span></a>
         </li>
+        @endif
         @endcan
 
         @show
