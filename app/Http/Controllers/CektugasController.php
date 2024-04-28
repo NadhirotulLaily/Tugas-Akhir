@@ -45,7 +45,7 @@ class CektugasController extends Controller
      * @param  \App\Models\cektugas  $cektugas
      * @return \Illuminate\Http\Response
      */
-    public function show(cektugas $cektugas)
+    public function show( $cektugas)
     {
         //
     }
@@ -56,7 +56,7 @@ class CektugasController extends Controller
      * @param  \App\Models\cektugas  $cektugas
      * @return \Illuminate\Http\Response
      */
-    public function edit(cektugas $cektugas)
+    public function edit( $cektugas)
     {
         //
     }
@@ -68,7 +68,7 @@ class CektugasController extends Controller
      * @param  \App\Models\cektugas  $cektugas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, cektugas $cektugas)
+    public function update(Request $request, $cektugas)
     {
         //
     }
@@ -79,7 +79,7 @@ class CektugasController extends Controller
      * @param  \App\Models\cektugas  $cektugas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(cektugas $cektugas)
+    public function destroy( $cektugas)
     {
         //
     }
