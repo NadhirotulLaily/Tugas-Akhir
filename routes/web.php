@@ -68,9 +68,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
 
     //Pilih Tugas
-    Route::get('/pilih-tugas', [PilihtugasController::class, 'index'])->name('pilihtugas.index');
-    Route::get('/upload-tugas', [PilihtugasController::class, 'showUploadForm'])->name('pilihtugas.upload');
-    Route::post('/upload-tugas', [PilihtugasController::class, 'upload'])->name('pilihtugas.upload.submit');
+    Route::get('/pilih-tugas', [PilihTugasController::class, 'index'])->name('pilihtugas.index');
+    Route::get('/upload-tugas', [PilihTugasController::class, 'showUploadForm'])->name('pilihtugas.upload');
+    Route::post('/upload-tugas', [PilihTugasController::class, 'upload'])->name('pilihtugas.upload.submit');
+    Route::post('/pilih-tugas', [PilihTugasController::class, 'processSelectedTasks'])->name('pilih.tugas.process');
+
 
 });
 
