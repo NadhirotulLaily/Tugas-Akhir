@@ -36,39 +36,20 @@
                           <th></th>
                       </tr>
                       <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Tugas 1</td>
-                            <td>5</td>
-                            <td>
-                              <input type="file" name="bukti_tugas_1">
-                          </td>
-                          <td>
-                            <button type="submit" class="btn btn-primary">Kirim</button>
-                        </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Tugas 2</td>
-                            <td>2</td>
-                            <td>
-                              <input type="file" name="bukti_tugas_2">
-                          </td>
-                          <td>
-                            <button type="submit" class="btn btn-primary">Kirim</button>
-                        </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Tugas 3</td>
-                            <td>6</td>
-                            <td>
-                              <input type="file" name="bukti_tugas_3">
-                          </td>
-                          <td>
-                            <button type="submit" class="btn btn-primary">Kirim</button>
-                          </td>
-                        </tr>
+                        <tbody>
+                          @foreach($selectedTasks as $index => $task)
+                          <tr>
+                              <td>{{ $index + 1 }}</td>
+                              <td>{{ $task->tugas }}</td>
+                              <td>{{ $task->waktu }}</td>
+                              <td>
+                                  <input type="file" name="bukti_tugas_{{ $task->id }}">
+                              </td>
+                              <td>
+                                  <button type="submit" class="btn btn-primary">Kirim</button>
+                              </td>
+                          </tr>
+                          @endforeach
                       </tbody>
                       
                   </table>

@@ -2,11 +2,90 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PilihTugas;
+use App\Models\pilihtugas;
+use App\Models\tugas;
 use Illuminate\Http\Request;
 
-class PilihTugasController extends Controller
+class PilihtugasController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+        $tugas = Tugas::all();
+    return view('pilihtugas.index', compact('tugas'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\pilihtugas  $pilihtugas
+     * @return \Illuminate\Http\Response
+     */
+    public function show( $pilihtugas)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\pilihtugas  $pilihtugas
+     * @return \Illuminate\Http\Response
+     */
+    public function edit( $pilihtugas)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\pilihtugas  $pilihtugas
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $cektugas)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\pilihtugas  $pilihtugas
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy( $pilihtugas)
+    {
+        //
+    }
+
     /**
      * Proses pemilihan tugas oleh pengguna.
      *
@@ -15,19 +94,16 @@ class PilihTugasController extends Controller
      */
     public function processSelectedTasks(Request $request)
     {
-        // Validasi data yang dikirim dari form, pastikan request memiliki selected_tasks
-        $request->validate([
-            'selected_tasks' => 'required|array',
-            'selected_tasks.*' => 'exists:tugas,id',
-        ]);
+        // Validasi permintaan jika diperlukan
+        
+        // Ambil ID dari tugas yang dipilih dari permintaan
+        $selectedTaskIds = $request->input('selected_tasks');
 
-        // Mendapatkan array dari tugas yang dipilih oleh pengguna
-        $selectedTasks = $request->input('selected_tasks');
+        // Ambil hanya tugas-tugas yang dipilih dari database
+        $selectedTasks = Tugas::whereIn('id', $selectedTaskIds)->get();
 
-        // Panggil fungsi pilihTugas dari model Tugas untuk memproses pemilihan tugas
-        PilihTugas::pilihTugas($selectedTasks);
-
-        // Redirect atau kembali ke halaman sebelumnya dengan pesan sukses
-        return redirect()->back()->with('success', 'Tugas berhasil dipilih.');
+        // Kembalikan tampilan dengan tugas-tugas yang dipilih
+        return view('pilihtugas.upload', compact('selectedTasks'));
     }
+    
 }
