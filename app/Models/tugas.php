@@ -11,6 +11,6 @@ class tugas extends Model
 
     protected $table = 'tugas';
     protected $fillable = [
-        'tugas', 'waktu', 'status'
+        'tugas', 'waktu', 'status','foto'
     ];
 }

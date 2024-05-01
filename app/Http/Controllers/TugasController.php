@@ -6,6 +6,7 @@ use App\Models\Tugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 class TugasController extends Controller
 {
@@ -43,22 +44,36 @@ class TugasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'tugas' => 'required|max:45',
-            'waktu' => 'required|integer',
+            'tugas' => 'required|string',
+            'waktu' => 'required|string',
             'status' => 'required|in:available,unavailable',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // validasi untuk gambar
         ]);
 
+        // Simpan gambar ke direktori
+        if ($request->hasFile('foto')) {
+            $image = $request->file('foto');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->storeAs('public/img/mhs', $imageName);
+            $validatedData['foto'] = $imageName;
+        }
+
+        // Simpan data tugas ke basis data
         $tugas = new Tugas();
         $tugas->tugas = $validatedData['tugas'];
         $tugas->waktu = $validatedData['waktu'];
         $tugas->status = $validatedData['status'];
+        $tugas->foto = $validatedData['foto']; // Tambahkan field gambar ke dalam data tugas
         $tugas->save();
 
-        return redirect()->route('tugas.index')->with('success', 'Tugas berhasil dibuat.');
+        return redirect()->route('tugas.index');
     }
+
 
     /**
      * Display the specified resource.
@@ -96,6 +111,8 @@ class TugasController extends Controller
             'tugas' => 'required|max:45',
             'waktu' => 'required|integer',
             'status' => 'required|in:available,unavailable',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|min:2|max:9000',
+
         ]);
 
         
