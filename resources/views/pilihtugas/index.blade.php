@@ -22,7 +22,7 @@
                     <div class="clearfix mb-3"></div>
 
                     <div class="table-responsive">
-                        <form method="POST" action="{{ route('pilihtugas.process') }}">
+                        <form method="POST" action="{{ route('cektugas.index') }}">
                             @csrf
                             <table class="table table-striped">
                                 <thead>
