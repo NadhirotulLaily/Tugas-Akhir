@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\cektugas;
+use App\Models\tugas;
 use Illuminate\Http\Request;
 
 class CektugasController extends Controller
@@ -15,7 +16,10 @@ class CektugasController extends Controller
     public function index()
     {
         //
-        return view('cektugas.index');
+        $tugas = Tugas::all();
+        
+        // Kirim data tugas ke view cektugas.index
+        return view('cektugas.index', compact('tugas'));
     }
 
     /**
