@@ -37,13 +37,13 @@
                 <option value="8">8</option>
               </select>
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
               <label for="status">Status</label>
               <select name="status" id="status" class="form-control">
                 <option value="available">Available</option>
                 <option value="unavailable">Unavailable</option>
               </select>
-            </div>
+            </div> --}}
             <button type="submit" class="btn btn-primary">Simpan</button>
           </form>
         </div>

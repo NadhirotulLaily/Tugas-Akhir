@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\pilih_tugas;
 use App\Models\cektugas;
 use App\Models\tugas;
 use Illuminate\Http\Request;
@@ -41,6 +42,11 @@ class CektugasController extends Controller
     public function store(Request $request)
     {
         //
+        
+        $bukti_tugas = $request->file('foto')->store('public');
+
+        ddd($bukti_tugas);
+        return response()->redirectTo(route(cektugas.index));
     }
 
     /**

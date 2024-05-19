@@ -22,7 +22,8 @@
                     <div class="clearfix mb-3"></div>
 
                     <div class="table-responsive">
-                        <form method="POST" action="{{ route('pilihtugas.process') }}">
+                        <form method="POST" action="{{ route('pilih.tugas') }}" onsubmit="return confirm('Apakah Anda yakin ingin memilih tugas ini?')">
+
                             @csrf
                             <table class="table table-striped">
                                 <thead>
@@ -36,16 +37,17 @@
                                 </thead>
                                 <tbody>
                                     @foreach($tugas as $index => $tugasItem)
-                                    <tr>
-                                        <td>{{ $index + 1 }}</td>
-                                        <td>{{ $tugasItem->tugas }}</td>
-                                        <td>{{ $tugasItem->waktu }}</td>
-                                        <td>{{ $tugasItem->status }}</td>
-                                        <td>
-                                            <input type="checkbox" name="selected_tasks[]" value="{{ $tugasItem->id }}">
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $tugasItem->tugas }}</td>
+                                            <td>{{ $tugasItem->waktu }}</td>
+                                            <td>{{ $tugasItem->status }}</td>
+                                            <td>
+                                                <input type="checkbox" name="selected_tasks[]" value="{{ $tugasItem->id }}" {{ $tugasItem->status == 'unavailable' ? 'disabled' : '' }}>
+                                            </td>
+                                        </tr>
                                     @endforeach
+
                                 </tbody>
                             </table>
                             <button type="submit" class="btn btn-primary float-right">Pilih</button>
@@ -53,9 +55,9 @@
                     </div>
                     <div class="float-right">
                         <nav>
-                            {{-- <ul class="pagination">
+                            <ul class="pagination">
                                 
-                            </ul> --}}
+                            </ul>
                         </nav>
                     </div>
                 </div>

@@ -46,6 +46,12 @@
         @endif
         @endcan
 
+        @can('index-admin')
+        <li class="nav-item dropdown">
+            <a href="{{ route('cektugas.index') }}" class="nav-link"><i class="fas fa-solid fa-list"></i><span>Cek Tugas</span></a>
+        </li>
+        @endcan
+
         @show
 
     </ul>

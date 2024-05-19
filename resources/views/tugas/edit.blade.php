@@ -36,13 +36,13 @@
                   <option value="6" {{ $tugas->waktu == '6' ? 'selected' : '' }}>6</option>
                 </select>
               </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="status">Status</label>
                 <select name="status" id="status" class="form-control">
                     <option value="available" {{ $tugas == 'available' ? 'selected' : '' }}>Available</option>
                     <option value="unavailable" {{ $tugas == 'unavailable' ? 'selected' : '' }}>Unavailable</option>
                 </select>
-            </div>
+            </div> --}}
             <button type="submit" class="btn btn-primary">Update</button>
           </form>
         </div>

@@ -35,7 +35,7 @@
                           <th>No</th>
                           <th>Tugas</th>
                           <th>Waktu</th>
-                          <th>Status</th>
+                          {{-- <th>Status</th> --}}
                           <th>Action</th>
                       </tr>
                       
@@ -57,9 +57,9 @@
                             <a href="{{ route('tugas.edit', $tugasItem->id) }}" class="btn btn-sm btn-info btn-icon"><i class="fas fa-edit"></i> Edit</a>
                             <a href="/input-tugas/delete/{{ $tugasItem->id }}" class="btn btn-sm btn-danger btn-icon confirm-delete"><i class="fas fa-times"></i> Delete</a>
                             
-                            @if ($tugasItem->status == 'available')
+                            {{-- @if ($tugasItem->status == 'available')
                                 <a href="{{ route('cektugas.index') }}" class="btn btn-sm btn-success btn-icon">Cek Tugas</a>
-                            @endif
+                            @endif --}}
                         </td>
                       </tr>
                       @empty
@@ -72,10 +72,10 @@
                   </div>
                   <div class="float-right">
                     <nav>
-                      {{-- <ul class="pagination">
-                        
-                      </ul> --}}
+                        {{ $tugas->links() }}
                     </nav>
+                </div>
+                
                   </div>
                 </div>
               </div>

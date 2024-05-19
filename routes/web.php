@@ -49,6 +49,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     // Tugas
+    
+    
     Route::get('/input-tugas', function () {
         return view('tugas.input');
     })->name('input.tugas'); 
@@ -58,22 +60,28 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/tugas/{id}/edit', [TugasController::class, 'edit'])->name('tugas.edit');
     Route::put('/tugas/{id}/update', [TugasController::class, 'update'])->name('tugas.update');
     Route::get('/input-tugas/delete/{id}', [TugasController::class, 'destroy'])->name('tugas.delete');
+    Route::post('/upload-bukti/{id}', [TugasController::class, 'uploadBukti'])->name('upload.bukti');
+    Route::post('/proses-pilih-tugas', [TugasController::class, 'processPilihTugas'])->name('pilih.tugas');
+
 
     Route::resource('tugas', TugasController::class);
+    
 
     // Cek Tugas
+    Route::resource('cektugas', CektugasController::class);
     Route::get('/cektugas', [CektugasController::class, 'index'])->name('cektugas.index');
 
     
     
 
     //Pilih Tugas
+    Route::resource('pilih-tugas', PilihtugasController::class);
+    
     Route::get('/pilih-tugas', [PilihtugasController::class, 'index'])->name('pilihtugas.index');
     Route::get('/upload-tugas', [PilihtugasController::class, 'showUploadForm'])->name('pilihtugas.upload');
     Route::post('/upload-tugas', [PilihtugasController::class, 'upload'])->name('pilihtugas.upload.submit');
     Route::post('/pilihtugas/process', [PilihtugasController::class, 'processSelectedTasks'])->name('pilihtugas.process');
 
-    // Route::post('/pilih-tugas', 'PilihTugasController@processSelectedTasks');
 
 
 });

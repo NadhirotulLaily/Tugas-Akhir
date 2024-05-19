@@ -19,12 +19,9 @@ class TugasController extends Controller
     {
         
         //
-        $tugas = DB::table('tugas')
-        ->when($request->input('search'),function ($query, $search){
-            $query->where('nama','like','%'.$search.'%')
-            ->orWhere('semester','like','%'.$search.'%');
-        })
-        ->paginate(10);
+        $tugas = Tugas::paginate(10); 
+        
+        
         return view ('tugas.index', compact ('tugas'));
     }
 
@@ -48,29 +45,19 @@ class TugasController extends Controller
 
     public function store(Request $request)
     {
+         // Validasi data
         $validatedData = $request->validate([
-            'tugas' => 'required|string',
-            'waktu' => 'required|string',
-            'status' => 'required|in:available,unavailable',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // validasi untuk gambar
+            'tugas' => 'required|string|max:255',
+            'waktu' => 'required|integer|between:1,8',
         ]);
 
-        // Simpan gambar ke direktori
-        if ($request->hasFile('foto')) {
-            $image = $request->file('foto');
-            $imageName = time().'.'.$image->getClientOriginalExtension();
-            $image->storeAs('public/img/mhs', $imageName);
-            $validatedData['foto'] = $imageName;
-        }
-
-        // Simpan data tugas ke basis data
+        // Simpan data ke database
         $tugas = new Tugas();
         $tugas->tugas = $validatedData['tugas'];
         $tugas->waktu = $validatedData['waktu'];
-        $tugas->status = $validatedData['status'];
-        $tugas->foto = $validatedData['foto']; // Tambahkan field gambar ke dalam data tugas
         $tugas->save();
 
+        // Redirect ke halaman index
         return redirect()->route('tugas.index');
     }
 
@@ -107,15 +94,6 @@ class TugasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'tugas' => 'required|max:45',
-            'waktu' => 'required|integer',
-            'status' => 'required|in:available,unavailable',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|min:2|max:9000',
-
-        ]);
-
-        
             
         try {
             $tugas = Tugas::findOrFail($id);
@@ -123,7 +101,7 @@ class TugasController extends Controller
             $tugas->update([
                 'tugas' => $request->tugas,
                 'waktu' => $request->waktu,
-                'status' => $request->status,
+                // 'status' => $request->status,
             ]);
     
             return redirect()->route('tugas.index')->with('success', 'Data tugas berhasil diperbarui.');
@@ -143,4 +121,43 @@ class TugasController extends Controller
         DB::table('tugas')->where('id',$id)->delete();
         return redirect()->route('tugas.index');
     }
+
+    public function uploadBukti(Request $request, $id)
+    {
+        // Validasi permintaan
+        $request->validate([
+            'bukti_tugas' => 'required|file|max:2048', // Sesuaikan dengan kebutuhan Anda
+        ]);
+
+        // Lakukan penyimpanan bukti tugas ke penyimpanan yang sesuai (misalnya: storage lokal)
+        if ($request->hasFile('bukti_tugas')) {
+            $file = $request->file('bukti_tugas');
+            $fileName = $file->getClientOriginalName();
+            $file->storeAs('public/bukti_tugas', $fileName); // Sesuaikan dengan kebutuhan Anda
+        }
+
+        // Lakukan tindakan lain yang diperlukan, seperti memperbarui status tugas dalam database
+        $tugas = Tugas::findOrFail($id);
+        $tugas->bukti_tugas = 'bukti_tugas/' . $fileName; // Sesuaikan dengan kebutuhan Anda
+        $tugas->status = 'uploaded'; // Misalnya, mengubah status tugas menjadi 'uploaded'
+        $tugas->save();
+
+        // Redirect ke halaman yang sesuai atau berikan respons yang sesuai
+        return redirect()->route('cek.tugas')->with('success', 'Bukti tugas berhasil diunggah.');
+    }
+
+    public function processPilihTugas(Request $request)
+    {
+        // Validasi permintaan formulir jika diperlukan
+
+        // Dapatkan data tugas yang dipilih dari permintaan formulir
+        $selectedTasksIds = $request->input('selected_tasks');
+
+        // Dapatkan detail tugas yang dipilih dari database
+        $selectedTasks = Tugas::whereIn('id', $selectedTasksIds)->get();
+
+        // Kirim data tugas yang dipilih ke tampilan
+        return view('pilihtugas.upload', ['selectedTasks' => $selectedTasks]);
+    }
+
 }
