@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pilihtugas;
-use App\Models\tugas;
+use App\Models\PilihTugas;
+use App\Models\Tugas;
 use Illuminate\Http\Request;
 
 class PilihtugasController extends Controller
@@ -15,11 +15,12 @@ class PilihtugasController extends Controller
      */
     public function index()
     {
-        // Ambil semua tugas dari database
+        // 
         $tugas = Tugas::all();
         
         // Kembalikan tampilan index dengan tugas-tugas yang tersedia
         return view('pilihtugas.index', compact('tugas'));
+    
     }
 
     /**
@@ -30,30 +31,7 @@ class PilihtugasController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi permintaan jika diperlukan
-
-        // Ambil ID tugas yang dipilih dari permintaan
-        $selectedTaskIds = $request->input('selected_tasks');
-
-        // Loop melalui setiap ID tugas yang dipilih
-        foreach ($selectedTaskIds as $selectedTaskId) {
-            // Cari tugas berdasarkan ID
-            $selectedTask = Tugas::findOrFail($selectedTaskId);
-
-            // Perbarui status tugas menjadi "unavailable"
-            $selectedTask->update([
-                'status' => 'unavailable',
-            ]);
-
-            // Simpan informasi tentang tugas yang dipilih ke dalam database
-            PilihTugas::create([
-                'tugas_id' => $selectedTaskId,
-                // Jika ada informasi tambahan yang ingin Anda simpan, tambahkan di sini
-            ]);
-        }
-
-        // Redirect ke halaman create tugas dengan pesan sukses jika diperlukan
-        return redirect()->route('tugas.create')->with('success', 'Tugas berhasil dipilih.');
+        //
     }
 
     /**
@@ -63,11 +41,11 @@ class PilihtugasController extends Controller
      */
     public function create()
     {
-        // Ambil daftar tugas yang tersedia
-        $availableTasks = Tugas::whereNotIn('id', pilihtugas::pluck('tugas_id'))->get();
+        // // Ambil daftar tugas yang tersedia
+        // $availableTasks = Tugas::whereNotIn('id', pilihtugas::pluck('tugas_id'))->get();
         
-        // Kembalikan tampilan create dengan daftar tugas yang tersedia
-        return view('pilihtugas.create', compact('availableTasks'));
+        // // Kembalikan tampilan create dengan daftar tugas yang tersedia
+        // return view('pilihtugas.create', compact('availableTasks'));
     }
 
     /**
@@ -102,5 +80,34 @@ class PilihtugasController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showUploadForm()
+    {
+        // Ambil semua tugas yang sudah dipilih dengan relasi tugas
+        $selectedTasks = PilihTugas::with('tugas')->get();
+        return view('pilihtugas.upload', compact('selectedTasks'));
+    }
+
+    public function process(Request $request)
+    {
+        $selectedTasks = $request->input('selected_tasks', []);
+
+        if (empty($selectedTasks)) {
+            return redirect()->back()->with('error', 'Tidak ada tugas yang dipilih.');
+        }
+
+        foreach ($selectedTasks as $taskId) {
+            PilihTugas::create(['tugas_id' => $taskId]);
+
+            // Update status tugas menjadi 'unavailable'
+            $task = Tugas::find($taskId);
+            if ($task) {
+                $task->status = 'unavailable';
+                $task->save();
+            }
+        }
+
+        return redirect()->route('pilihtugas.upload')->with('success', 'Tugas berhasil dipilih.');
     }
 }

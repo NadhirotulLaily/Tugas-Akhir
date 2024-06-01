@@ -122,28 +122,9 @@ class TugasController extends Controller
         return redirect()->route('tugas.index');
     }
 
-    public function uploadBukti(Request $request, $id)
+    public function uploadBukti(Request $request)
     {
-        // Validasi permintaan
-        $request->validate([
-            'bukti_tugas' => 'required|file|max:2048', // Sesuaikan dengan kebutuhan Anda
-        ]);
-
-        // Lakukan penyimpanan bukti tugas ke penyimpanan yang sesuai (misalnya: storage lokal)
-        if ($request->hasFile('bukti_tugas')) {
-            $file = $request->file('bukti_tugas');
-            $fileName = $file->getClientOriginalName();
-            $file->storeAs('public/bukti_tugas', $fileName); // Sesuaikan dengan kebutuhan Anda
-        }
-
-        // Lakukan tindakan lain yang diperlukan, seperti memperbarui status tugas dalam database
-        $tugas = Tugas::findOrFail($id);
-        $tugas->bukti_tugas = 'bukti_tugas/' . $fileName; // Sesuaikan dengan kebutuhan Anda
-        $tugas->status = 'uploaded'; // Misalnya, mengubah status tugas menjadi 'uploaded'
-        $tugas->save();
-
-        // Redirect ke halaman yang sesuai atau berikan respons yang sesuai
-        return redirect()->route('cek.tugas')->with('success', 'Bukti tugas berhasil diunggah.');
+        
     }
 
     public function processPilihTugas(Request $request)

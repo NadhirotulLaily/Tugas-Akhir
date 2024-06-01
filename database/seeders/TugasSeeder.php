@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\PilihTugas;
+use App\Models\Tugas;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PilihTugasSeeder extends Seeder
+class TugasSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,6 +16,6 @@ class PilihTugasSeeder extends Seeder
     public function run()
     {
         //
-        PilihTugas::factory()->count(10)->create();
+        Tugas::factory()->count(10)->create();
     }
 }

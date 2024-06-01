@@ -35,7 +35,7 @@
                           <th>No</th>
                           <th>Tugas</th>
                           <th>Waktu</th>
-                          {{-- <th>Status</th> --}}
+                          <th>Status</th>
                           <th>Action</th>
                       </tr>
                       

@@ -13,4 +13,9 @@ class tugas extends Model
     protected $fillable = [
         'tugas', 'waktu', 'status',
     ];
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('tugas', length: 45);
             $table->integer('waktu');
             $table->enum('status', ['available', 'unavailable'])->default('available');
-            // $table->string('bukti_tugas');
+            $table->string('path');
             $table->timestamps();
         });
     }

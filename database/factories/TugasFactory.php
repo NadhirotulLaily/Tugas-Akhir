@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\pilih_tugas>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tugas>
  */
-class PilihTugasFactory extends Factory
+class TugasFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,7 +21,8 @@ class PilihTugasFactory extends Factory
             'tugas' => $this->faker->sentence($nbWords = 3),
             'waktu' => $this->faker->randomDigit(),
             'status' => 'available',
-            // 'bukti_tugas' => 'storage/default.png',
+            'path' => 'storage/default.png',
+        
         ];
     }
 }

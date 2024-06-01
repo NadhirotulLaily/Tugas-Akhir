@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pilih_tugas;
+use App\Models\PilihTugas;
 use App\Models\cektugas;
 use App\Models\tugas;
+use App\Http\Requests\StorePilihTugasRequest;
 use Illuminate\Http\Request;
 
 class CektugasController extends Controller
@@ -14,15 +15,14 @@ class CektugasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $tugas = Tugas::all();
+        $tugas = PilihTugas::all();
         
         // Kirim data tugas ke view cektugas.index
         return view('cektugas.index', compact('tugas'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -36,17 +36,21 @@ class CektugasController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StorePilihTugas  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePilihTugasRequest $request)
     {
-        //
-        
-        $bukti_tugas = $request->file('foto')->store('public');
+        $bukti_tugas_files = $request->file('bukti_tugas');
 
-        ddd($bukti_tugas);
-        return response()->redirectTo(route(cektugas.index));
+        foreach ($bukti_tugas_files as $index => $file) {
+            $path = $file->store('public/bukti_tugas');
+            $selectedTask = PilihTugas::find($request->input('task_ids')[$index]);
+            $selectedTask->bukti_tugas = $path;
+            $selectedTask->save();
+        }
+
+        return redirect()->route('pilihtugas.upload')->with('success', 'File uploaded successfully.');
     }
 
     /**

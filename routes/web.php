@@ -70,6 +70,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Cek Tugas
     Route::resource('cektugas', CektugasController::class);
     Route::get('/cektugas', [CektugasController::class, 'index'])->name('cektugas.index');
+    Route::post('/cektugas/store', [CektugasController::class, 'store'])->name('cektugas.store');
+
 
     
     
@@ -80,7 +82,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pilih-tugas', [PilihtugasController::class, 'index'])->name('pilihtugas.index');
     Route::get('/upload-tugas', [PilihtugasController::class, 'showUploadForm'])->name('pilihtugas.upload');
     Route::post('/upload-tugas', [PilihtugasController::class, 'upload'])->name('pilihtugas.upload.submit');
-    Route::post('/pilihtugas/process', [PilihtugasController::class, 'processSelectedTasks'])->name('pilihtugas.process');
+    Route::post('/pilihtugas/process', [PilihtugasController::class, 'process'])->name('pilihtugas.process');
+    
 
 
 

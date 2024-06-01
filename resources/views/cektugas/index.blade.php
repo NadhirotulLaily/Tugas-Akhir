@@ -34,8 +34,7 @@
                                     <th>No</th>
                                     <th>Tugas</th>
                                     <th>Waktu</th>
-                                    <th>Status</th>
-                                    <th>Bukti</th>
+                                    <th>Bukti Tugas</th>
                                     <th>Verifikasi</th>
                                 </tr>
                             </thead>
@@ -43,40 +42,14 @@
                                 @forelse ($tugas as $index => $tugasItem)
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
-                                    <td>{{ $tugasItem->tugas }}</td>
-                                    <td>{{ $tugasItem->waktu }}</td>
+                                    <td>{{ $tugasItem->tugas->tugas }}</td>
+                                    <td>{{ $tugasItem->tugas->waktu }}</td>
                                     <td>
-                                        @if ($tugasItem->status == 'available')
-                                        <span class="badge badge-success" style="color: white">{{ $tugasItem->status }}</span>
+                                         @if($tugasItem->bukti_tugas)
+                                            <img src="{{ Storage::url($tugasItem->bukti_tugas) }}" alt="{{ $tugasItem->tugas->tugas }}" width="100">
                                         @else
-                                        <span class="badge badge-danger" style="color: white">{{ $tugasItem->status }}</span>
+                                            <img src="{{ asset('storage/default.png')}}" alt="{{ $tugasItem->tugas->tugas }}">
                                         @endif
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gambarModal{{ $tugasItem->id }}">Lihat Gambar</button>
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="gambarModal{{ $tugasItem->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Gambar Tugas</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        @if($tugasItem->foto)
-                                                        <img src="{{ asset('public/assets/img/mhs'.$tugasItem->foto) }}" alt="Foto Tugas" style="max-width: 100%;">
-                                                        @else
-                                                        Gambar tidak tersedia
-                                                        @endif
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </td>
                                     <td>
                                         <button class="btn btn-success" disabled><i class="fas fa-check"></i></button>

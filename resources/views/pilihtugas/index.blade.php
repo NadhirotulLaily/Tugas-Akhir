@@ -22,8 +22,7 @@
                     <div class="clearfix mb-3"></div>
 
                     <div class="table-responsive">
-                        <form method="POST" action="{{ route('pilih.tugas') }}" onsubmit="return confirm('Apakah Anda yakin ingin memilih tugas ini?')">
-
+                        <form method="POST" action="{{ route('pilihtugas.process') }}" onsubmit="return confirm('Apakah Anda yakin ingin memilih tugas ini?')">
                             @csrf
                             <table class="table table-striped">
                                 <thead>
@@ -47,18 +46,10 @@
                                             </td>
                                         </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                             <button type="submit" class="btn btn-primary float-right">Pilih</button>
                         </form>
-                    </div>
-                    <div class="float-right">
-                        <nav>
-                            <ul class="pagination">
-                                
-                            </ul>
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -66,6 +57,7 @@
     </div>
 </section>
 @endsection
+
 
 @section('sidebar')
 @parent
