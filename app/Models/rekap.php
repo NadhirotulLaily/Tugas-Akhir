@@ -11,6 +11,11 @@ class Rekap extends Model
 
     protected $table = 'rekap';
     protected $fillable = [
-        'nama', 'nim', 'semester', 'kompen'
+        'nama', 'nim', 'semester', 'kompen','email'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'email', 'email');
+    }
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nim', length: 45);
             $table->string('semester', length: 45);
             $table->integer('kompen');
+            $table->string('email', length: 255);
             $table->timestamps();
         });
     }

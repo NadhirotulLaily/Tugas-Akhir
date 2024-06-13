@@ -6,6 +6,7 @@ use App\Models\Rekap;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 class RekapController extends Controller
 {
@@ -17,12 +18,24 @@ class RekapController extends Controller
     public function index(Request $request)
     {
         //
-        $rekap = DB::table('rekap')
-        ->when($request->input('search'),function ($query, $search){
-            $query->where('nama','like','%'.$search.'%')
-            ->orWhere('semester','like','%'.$search.'%');
-        })
-        ->paginate(10);
+        // Mengambil user yang sedang login
+        $user = Auth::user();
+
+        // Mengambil data rekap yang terkait dengan user yang sedang login
+        if ($user->role == 'superadmin') {
+            // Jika admin, ambil semua data rekap
+            $rekap = Rekap::all();
+        } else {
+            // Jika bukan admin, ambil data rekap berdasarkan email pengguna
+            $rekap = $user->rekaps()->get();
+        }
+
+        //$rekap = DB::table('rekap')
+        // ->when($request->input('search'),function ($query, $search){
+        //     $query->where('nama','like','%'.$search.'%')
+        //     ->orWhere('semester','like','%'.$search.'%');
+        // })
+        // ->paginate(10);
         return view ('rekap.index', compact ('rekap'));
     }
 
@@ -56,6 +69,7 @@ class RekapController extends Controller
             $rekap->nim = $request->input('nim');
             $rekap->semester = $request->input('semester');
             $rekap->kompen = $request->input('kompen');
+            $rekap->email = $request->input('email');
             $rekap->save();
     
             return redirect()->route('rekap.index')->with('success', 'Data rekap berhasil ditambahkan.');

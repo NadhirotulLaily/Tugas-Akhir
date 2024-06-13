@@ -34,6 +34,10 @@
               </select>
             </div>
             <div class="form-group">
+              <label for="nim">Email</label>
+              <input type="text" name="email" id="email" class="form-control" placeholder="Masukkan Email Mahasiswa">
+            </div>
+            <div class="form-group">
               <label for="semester">Semester</label>
               <select name="semester" id="semester" class="form-control">
                 <option value="1">1</option>
