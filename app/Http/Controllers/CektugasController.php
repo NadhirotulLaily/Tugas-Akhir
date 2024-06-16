@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PilihTugas;
 use App\Models\cektugas;
 use App\Models\tugas;
+use App\Models\rekap;
 use App\Http\Requests\StorePilihTugasRequest;
 use Illuminate\Http\Request;
 
@@ -82,10 +83,28 @@ class CektugasController extends Controller
      * @param  \App\Models\cektugas  $cektugas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $cektugas)
-    {
-        //
-    }
+    public function update(Request $request, $id)
+{
+    // Temukan data PilihTugas berdasarkan ID
+    $pilihTugas = PilihTugas::findOrFail($id);
+    $email = $pilihTugas->email;
+
+    // Temukan rekaman rekap yang sesuai berdasarkan email
+    $rekap = Rekap::where('email', $email)->firstOrFail();
+
+    // Ambil nilai waktu dari tugas yang terkait
+    $waktu = $pilihTugas->tugas->waktu;
+
+    // Kurangi nilai kompen di rekapan
+    $rekap->kompen -= $waktu;
+
+    // Simpan rekapan yang sudah diperbarui
+    $rekap->save();
+
+    // Redirect kembali atau ke rute lain sesuai kebutuhan
+    return redirect()->route('cektugas.index')->with('success', 'Kompen berhasil diperbarui.');
+}
+
 
     /**
      * Remove the specified resource from storage.

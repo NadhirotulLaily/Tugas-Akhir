@@ -19,7 +19,7 @@ class TugasFactory extends Factory
         return [
             //
             'tugas' => $this->faker->sentence($nbWords = 3),
-            'waktu' => $this->faker->randomDigit(),
+            'waktu' => $this->faker->numberBetween(1, 9),
             'status' => 'available',
             'path' => 'storage/default.png',
         

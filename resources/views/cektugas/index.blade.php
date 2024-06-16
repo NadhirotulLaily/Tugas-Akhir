@@ -45,20 +45,25 @@
                                     <td>{{ $tugasItem->tugas->tugas }}</td>
                                     <td>{{ $tugasItem->tugas->waktu }}</td>
                                     <td>
-                                         @if($tugasItem->bukti_tugas)
-                                            <img src="{{ Storage::url($tugasItem->bukti_tugas) }}" alt="{{ $tugasItem->tugas->tugas }}" width="100">
+                                        @if($tugasItem->bukti_tugas)
+                                        <img src="{{ Storage::url($tugasItem->bukti_tugas) }}" alt="{{ $tugasItem->tugas->tugas }}" width="100">
                                         @else
-                                            <img src="{{ asset('storage/default.png')}}" alt="{{ $tugasItem->tugas->tugas }}">
+                                        <img src="{{ asset('storage/default.png')}}" alt="{{ $tugasItem->tugas->tugas }}">
                                         @endif
                                     </td>
                                     <td>
-                                        <button class="btn btn-success" disabled><i class="fas fa-check"></i></button>
-                                        <button class="btn btn-danger" disabled><i class="fas fa-times"></i></button>
+                                        <!-- Form untuk memicu update -->
+                                        <form action="{{ route('cektugas.update', $tugasItem->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
+                                        </form>
+                                        <button type="submit" class="btn btn-danger"><i class="fas fa-times"></i></button>
                                     </td>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="6">No tasks available.</td>
+                                    <td colspan="5">Tidak ada tugas yang tersedia.</td>
                                 </tr>
                                 @endforelse
                             </tbody>

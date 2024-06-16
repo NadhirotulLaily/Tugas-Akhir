@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PilihTugas;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PilihtugasController extends Controller
 {
@@ -84,8 +85,8 @@ class PilihtugasController extends Controller
 
     public function showUploadForm()
     {
-        // Ambil semua tugas yang sudah dipilih dengan relasi tugas
-        $selectedTasks = PilihTugas::with('tugas')->get();
+        // Ambil semua tugas yang sudah dipilih untuk pengguna yang sedang login
+        $selectedTasks = PilihTugas::with('tugas')->where('email', Auth::user()->email)->get();
         return view('pilihtugas.upload', compact('selectedTasks'));
     }
 
@@ -97,14 +98,28 @@ class PilihtugasController extends Controller
             return redirect()->back()->with('error', 'Tidak ada tugas yang dipilih.');
         }
 
-        foreach ($selectedTasks as $taskId) {
-            PilihTugas::create(['tugas_id' => $taskId]);
+        // Dapatkan email pengguna yang sedang login
+        $email = Auth::user()->email;
 
-            // Update status tugas menjadi 'unavailable'
-            $task = Tugas::find($taskId);
-            if ($task) {
-                $task->status = 'unavailable';
-                $task->save();
+        foreach ($selectedTasks as $taskId) {
+            // Periksa apakah tugas sudah dipilih oleh pengguna
+            $existingSelection = PilihTugas::where('email', $email)
+                                            ->where('tugas_id', $taskId)
+                                            ->first();
+
+            if (!$existingSelection) {
+                // Buat entri baru PilihTugas
+                PilihTugas::create([
+                    'email' => $email,
+                    'tugas_id' => $taskId,
+                ]);
+
+                // Update status tugas menjadi 'unavailable'
+                $task = Tugas::find($taskId);
+                if ($task) {
+                    $task->status = 'unavailable';
+                    $task->save();
+                }
             }
         }
 
