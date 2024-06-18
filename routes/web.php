@@ -5,6 +5,7 @@ use App\Http\Controllers\CektugasController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RekapController;
+use App\Http\Controllers\DashboardController;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Routing\RouteGroup;
@@ -26,9 +27,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('home', function () {
-        return view('dashboard.home');
-    })->name('home')->middleware('can:dashboard');
+    Route::get('home', [DashboardController::class, 'index'])->name('home')->middleware('can:dashboard');
 
     Route::get('edit-profile', function () {
         return view('dashboard.profile');

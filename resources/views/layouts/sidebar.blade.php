@@ -7,17 +7,9 @@
     </div>
     <ul class="sidebar-menu">
         @section('sidebar')
-        <li class="menu-header">Dashboard</li>
+        
         <li class="nav-item dropdown">
-            <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
-            <ul class="dropdown-menu">
-                <li>
-                    <a class="nav-link" href="index-0.html">General Dashboard</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="index.html">Ecommerce Dashboard</a>
-                </li>
-            </ul>
+            <a href="{{ route('home') }}" class="nav-link"><i class="fas fa-home"></i><span>Dashboard</span></a>
         </li>
 
         @can('index-user')
@@ -40,8 +32,12 @@
         
         @can('index-tugas')
         @if(auth()->user()->role == 'user')
+        <li class="menu-header">Tugas</li>
         <li class="nav-item dropdown">
             <a href="{{ route('pilihtugas.index') }}" class="nav-link"><i class="fas fa-solid fa-list"></i><span>Pilih Tugas</span></a>
+        </li>
+        <li class="nav-item dropdown">
+            <a href="{{ route('pilihtugas.upload') }}" class="nav-link"><i class="fas fa-solid fa-list"></i><span>Upload Tugas</span></a>
         </li>
         @endif
         @endcan

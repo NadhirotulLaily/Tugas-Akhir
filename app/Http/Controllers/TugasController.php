@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TugasController extends Controller
 {
@@ -58,6 +59,7 @@ class TugasController extends Controller
         $tugas->save();
 
         // Redirect ke halaman index
+        Alert::success('Berhasil', 'Tugas berhasil di tambah');
         return redirect()->route('tugas.index');
     }
 
@@ -103,7 +105,8 @@ class TugasController extends Controller
                 'waktu' => $request->waktu,
                 // 'status' => $request->status,
             ]);
-    
+
+            Alert::success('Berhasil', 'Tugas berhasil diperbarui');
             return redirect()->route('tugas.index')->with('success', 'Data tugas berhasil diperbarui.');
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
@@ -119,6 +122,7 @@ class TugasController extends Controller
     public function destroy($id)
     {
         DB::table('tugas')->where('id',$id)->delete();
+        Alert::success('Berhasil', 'Tugas berhasil dihapus');
         return redirect()->route('tugas.index');
     }
 

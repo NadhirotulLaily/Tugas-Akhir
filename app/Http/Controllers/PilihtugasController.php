@@ -6,6 +6,7 @@ use App\Models\PilihTugas;
 use App\Models\Tugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PilihtugasController extends Controller
 {
@@ -122,7 +123,7 @@ class PilihtugasController extends Controller
                 }
             }
         }
-
+        Alert::success('Berhasil', 'Tugas berhasil dipilih');
         return redirect()->route('pilihtugas.upload')->with('success', 'Tugas berhasil dipilih.');
     }
 }

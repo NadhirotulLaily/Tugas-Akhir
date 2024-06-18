@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rekap;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RekapController extends Controller
 {
@@ -71,7 +73,8 @@ class RekapController extends Controller
             $rekap->kompen = $request->input('kompen');
             $rekap->email = $request->input('email');
             $rekap->save();
-    
+
+            Alert::success('Berhasil', 'Data rekap berhasil ditambahkan ');
             return redirect()->route('rekap.index')->with('success', 'Data rekap berhasil ditambahkan.');
         
     }
@@ -127,7 +130,8 @@ class RekapController extends Controller
                 'semester' => $request->semester,
                 'kompen' => $request->kompen,
             ]);
-    
+
+            Alert::success('Berhasil', 'Data telah berhasil diperbarui');
             return redirect()->route('rekap.index')->with('success', 'Data rekap berhasil diperbarui.');
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
@@ -145,6 +149,7 @@ class RekapController extends Controller
     {
         
          DB::table('rekap')->where('id',$id)->delete();
+         Alert::success('Berhasil', 'Data telah berhasil dihapus');
          return redirect()->route('rekap.index');
         } 
     

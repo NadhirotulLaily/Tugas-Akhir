@@ -8,6 +8,7 @@ use App\Models\tugas;
 use App\Models\rekap;
 use App\Http\Requests\StorePilihTugasRequest;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CektugasController extends Controller
 {
@@ -50,7 +51,7 @@ class CektugasController extends Controller
             $selectedTask->bukti_tugas = $path;
             $selectedTask->save();
         }
-
+        Alert::success('Berhasil', 'File Berhasil Upload');
         return redirect()->route('pilihtugas.upload')->with('success', 'File uploaded successfully.');
     }
 
