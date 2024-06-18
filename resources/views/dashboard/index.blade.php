@@ -39,6 +39,36 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="card card-statistic-1">
+                <div class="card-icon bg-success">
+                    <i class="far fa-check-circle"></i>
+                </div>
+                <div class="card-wrap">
+                    <div class="card-header">
+                        <h4>Tugas Available</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ $availableTugas }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="card card-statistic-1">
+                <div class="card-icon bg-warning">
+                    <i class="far fa-times-circle"></i>
+                </div>
+                <div class="card-wrap">
+                    <div class="card-header">
+                        <h4>Tugas Unavailable</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ $unavailableTugas }}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="section-body">
     </div>
