@@ -52,5 +52,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Rekap::class, 'email', 'email');
     }
     
+    public function pilihTugas()
+    {
+        return $this->hasMany(PilihTugas::class, 'email', 'email');
+    }
     
 }

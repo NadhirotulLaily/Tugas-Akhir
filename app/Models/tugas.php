@@ -14,8 +14,5 @@ class tugas extends Model
         'tugas', 'waktu', 'status',
     ];
     
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    
 }

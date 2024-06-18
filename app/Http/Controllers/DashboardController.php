@@ -3,18 +3,42 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Rekap;
+use App\Models\PilihTugas;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DashboardController extends Controller
+{
+    /**
+     * Menampilkan dashboard berdasarkan role pengguna.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        /**
-         * Display a listing of the resource.
-         *
-         * @return \Illuminate\Http\Response
-         */
-        public function index()
-        {
-            return view('dashboard.index');
+        // Mengambil user yang sedang login
+        $user = Auth::user();
+
+        // Menginisialisasi variabel untuk data yang akan ditampilkan di dashboard
+        $totalKompen = 0;
+        $totalTugas = 0;
+
+        // Logika untuk menentukan data yang ditampilkan berdasarkan role user
+        if ($user->role == 'superadmin') {
+            // Jika user adalah superadmin, hitung total rekap dan tugas dari semua pengguna
+            $totalKompen = Rekap::sum('kompen');
+            $totalTugas = PilihTugas::count();
+        } else {
+            // Jika bukan superadmin, hitung total rekap dan tugas hanya untuk pengguna yang sedang login
+            $totalKompen = Rekap::where('email', $user->email)->sum('kompen');
+            $totalTugas = PilihTugas::where('email', $user->email)->count();
         }
+
+        // Tampilkan dashboard dengan data yang sudah dihitung
+        return view('dashboard.index', compact('totalKompen', 'totalTugas'));
+    }
+
     
         /**
          * Show the form for creating a new resource.
