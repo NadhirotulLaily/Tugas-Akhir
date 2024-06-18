@@ -46,6 +46,7 @@
                         <th>NIM</th>
                         <th>Semester</th>
                         <th>Kompen</th>
+                        <th>Cetak Bebas Kompen</th>
                         @can('index-user')
                         <th>Action</th>
                         @endcan
@@ -66,6 +67,11 @@
                         <td>
                           {{ $rekap->kompen }}
                         </td>
+                        <td>
+                          @if ($rekap->kompen == 0)
+                              <a href="{{ route('rekap.downloadPdf', $rekap->id) }}">Download Bebas Kompen PDF</a>
+                          @endif
+                      </td>
                         @can('index-user')
                         <td>
                           <a href="{{ route('rekap.edit', $rekap->id) }}"

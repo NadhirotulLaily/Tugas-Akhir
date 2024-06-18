@@ -83,6 +83,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/upload-tugas', [PilihtugasController::class, 'upload'])->name('pilihtugas.upload.submit');
     Route::post('/pilihtugas/process', [PilihtugasController::class, 'process'])->name('pilihtugas.process');
     
+    // cetak bebas kompen
+
+    Route::get('/rekap/{id}/download-pdf', [RekapController::class, 'downloadPdf'])->name('rekap.downloadPdf');
 
 
 
