@@ -6,6 +6,7 @@ use App\Models\Rekap;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -148,24 +149,23 @@ class RekapController extends Controller
     public function destroy($id)
     {
         
-         DB::table('rekap')->where('id',$id)->delete();
-         Alert::success('Berhasil', 'Data telah berhasil dihapus');
-         return redirect()->route('rekap.index');
-        } 
+        DB::table('rekap')->where('id',$id)->delete();
+        Alert::success('Berhasil', 'Data telah berhasil dihapus');
+        return redirect()->route('rekap.index');
+    } 
 
-        public function downloadPdf($id)
-        {
-            $rekap = Rekap::findOrFail($id);
-    
-            // Nama file PDF yang ada di direktori storage/app/public/pdf
-            $pdfbebaskompen = 'bebas kompen' . $rekap->id . '.pdf';
-            $path = storage_path('app/public/pdf/' . $pdfbebaskompen);
-    
-            if (!file_exists($path)) {
-                return redirect()->route('rekap.index')->withErrors('File PDF tidak ditemukan.');
-            }
-    
-            return response()->download($path, $pdfbebaskompen);
+    public function downloadPdf($id)
+    {
+        $rekap = Rekap::findOrFail($id);
+
+        // Nama file PDF yang ada di direktori storage/app/public/pdf
+        $bebaskompen = 'form bebas kompen.pdf';
+        $path = 'public/pdf/' . $bebaskompen;
+
+        if (!Storage::exists($path)) {
+            return redirect()->route('rekap.index')->withErrors('File PDF tidak ditemukan.');
         }
-    
+
+        return Storage::download($path, $bebaskompen);
+    }
 }
