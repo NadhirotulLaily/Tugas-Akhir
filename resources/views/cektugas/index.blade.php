@@ -45,11 +45,7 @@
                                     <td>{{ $tugasItem->tugas->tugas }}</td>
                                     <td>{{ $tugasItem->tugas->waktu }}</td>
                                     <td>
-                                        @if($tugasItem->bukti_tugas)
-                                        <img src="{{ Storage::url($tugasItem->bukti_tugas) }}" alt="{{ $tugasItem->tugas->tugas }}" width="100">
-                                        @else
-                                        <img src="{{ asset('storage/default.png')}}" alt="{{ $tugasItem->tugas->tugas }}">
-                                        @endif
+                                        <a href="{{ route('cektugas.lihatBukti', $tugasItem->id) }}" class="btn btn-info"><i class="fas fa-eye"></i> Lihat Bukti</a>
                                     </td>
                                     <td>
                                         <!-- Form untuk memicu update -->
