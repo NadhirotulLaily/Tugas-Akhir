@@ -103,7 +103,7 @@ class CektugasController extends Controller
     $rekap->save();
 
     // Redirect kembali atau ke rute lain sesuai kebutuhan
-    return redirect()->route('cektugas.lihatBukti')->with('success', 'Kompen berhasil diperbarui.');
+    return redirect()->route('cektugas.index')->with('success', 'Kompen berhasil diperbarui.');
 }
 
 
