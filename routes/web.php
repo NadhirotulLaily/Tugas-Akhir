@@ -70,6 +70,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('cektugas', CektugasController::class);
     Route::get('/cektugas', [CektugasController::class, 'index'])->name('cektugas.index');
     Route::post('/cektugas/store', [CektugasController::class, 'store'])->name('cektugas.store');
+    Route::get('/cektugas/lihat-bukti/{id}', [CektugasController::class, 'lihatBukti'])->name('cektugas.lihatBukti');
+    Route::put('/cektugas/update/{id}', [CektugasController::class, 'update'])->name('cektugas.update');
 
 
     
