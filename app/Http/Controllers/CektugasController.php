@@ -104,9 +104,9 @@ class CektugasController extends Controller
 
     $pilihTugas->delete();
 
-    // Redirect kembali atau ke rute lain sesuai kebutuhan
     Alert::success('Berhasil', 'Verifikasi Berhasil');
-    return redirect()->route('cektugas.index')->with('success', 'Kompen berhasil diperbarui.');
+    // Redirect kembali atau ke rute lain sesuai kebutuhan
+    return redirect()->route('cektugas.lihatBukti')->with('success', 'Kompen berhasil diperbarui.');
 }
 
 
