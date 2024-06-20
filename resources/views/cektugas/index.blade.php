@@ -45,25 +45,19 @@
                                     <td>{{ $tugasItem->tugas->tugas }}</td>
                                     <td>{{ $tugasItem->tugas->waktu }}</td>
                                     <td>
-                                        @if($tugasItem->bukti_tugas)
-                                        <img src="{{ Storage::url($tugasItem->bukti_tugas) }}" alt="{{ $tugasItem->tugas->tugas }}" width="100">
-                                        @else
-                                        <img src="{{ asset('storage/default.png')}}" alt="{{ $tugasItem->tugas->tugas }}">
-                                        @endif
+                                        <a href="{{ route('cektugas.lihatBukti', $tugasItem->id) }}" class="btn btn-info"><i class="fas fa-eye"></i> Lihat Bukti</a>
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <!-- Form untuk memicu update -->
-                                            <form action="{{ route('cektugas.update', $tugasItem->id) }}" method="POST" class="m-0">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
-                                            </form>
-                                            <button type="button" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                        <!-- Form untuk memicu update -->
+                                        <form action="{{ route('cektugas.update', $tugasItem->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
+                                        </form>
+                                        <button type="submit" class="btn btn-danger"><i class="fas fa-times"></i></button>
                                         </div>
                                     </td>
-                                    
-                                    
                                 </tr>
                                 @empty
                                 <tr>

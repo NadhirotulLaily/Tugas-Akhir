@@ -51,7 +51,7 @@ class CektugasController extends Controller
             $selectedTask->bukti_tugas = $path;
             $selectedTask->save();
         }
-        Alert::success('Berhasil', 'File Berhasil Upload, Tunggu verifikasi');
+        Alert::success('Berhasil', 'File Berhasil Upload');
         return redirect()->route('pilihtugas.upload')->with('success', 'File uploaded successfully.');
     }
 
@@ -105,8 +105,10 @@ class CektugasController extends Controller
     $pilihTugas->delete();
 
     Alert::success('Berhasil', 'Verifikasi Berhasil');
+
     // Redirect kembali atau ke rute lain sesuai kebutuhan
-    
+    return redirect()->route('cektugas.index')->with('success', 'Kompen berhasil diperbarui.');
+}
 
 
     /**
