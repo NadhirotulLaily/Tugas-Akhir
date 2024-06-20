@@ -45,17 +45,25 @@
                                     <td>{{ $tugasItem->tugas->tugas }}</td>
                                     <td>{{ $tugasItem->tugas->waktu }}</td>
                                     <td>
-                                        <a href="{{ route('cektugas.lihatBukti', $tugasItem->id) }}" class="btn btn-info"><i class="fas fa-eye"></i> Lihat Bukti</a>
+                                        @if($tugasItem->bukti_tugas)
+                                        <img src="{{ Storage::url($tugasItem->bukti_tugas) }}" alt="{{ $tugasItem->tugas->tugas }}" width="100">
+                                        @else
+                                        <img src="{{ asset('storage/default.png')}}" alt="{{ $tugasItem->tugas->tugas }}">
+                                        @endif
                                     </td>
                                     <td>
-                                        <!-- Form untuk memicu update -->
-                                        <form action="{{ route('cektugas.update', $tugasItem->id) }}" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
-                                        </form>
-                                        <button type="submit" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <!-- Form untuk memicu update -->
+                                            <form action="{{ route('cektugas.update', $tugasItem->id) }}" method="POST" class="m-0">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
+                                            </form>
+                                            <button type="button" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                        </div>
                                     </td>
+                                    
+                                    
                                 </tr>
                                 @empty
                                 <tr>
@@ -64,33 +72,6 @@
                                 @endforelse
                             </tbody>
                         </table>
-                    </div>
-                    <div class="float-right">
-                        <nav>
-                            <ul class="pagination">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
                     </div>
                 </div>
             </div>

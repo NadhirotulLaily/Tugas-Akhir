@@ -102,8 +102,11 @@ class CektugasController extends Controller
     // Simpan rekapan yang sudah diperbarui
     $rekap->save();
 
+    $pilihTugas->delete();
+
     // Redirect kembali atau ke rute lain sesuai kebutuhan
-    return redirect()->route('cektugas.lihatBukti')->with('success', 'Kompen berhasil diperbarui.');
+    Alert::success('Berhasil', 'Verifikasi Berhasil');
+    return redirect()->route('cektugas.index')->with('success', 'Kompen berhasil diperbarui.');
 }
 
 
