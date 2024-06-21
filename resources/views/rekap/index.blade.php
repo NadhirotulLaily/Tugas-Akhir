@@ -48,7 +48,14 @@
                                     <th>NIM</th>
                                     <th>Semester</th>
                                     <th>Kompen</th>
-                                    <th>Form Bebas Kompen</th>
+                                    <th>@cannot('index-admin')
+                                      Form Bebas Kompen
+                                    @endcannot </th>
+                                    <th>
+                                      @can('index-user')
+                                        Status
+                                      @endcan
+                                    </th>
                                     @can('index-user')
                                     <th>Action</th>
                                     @endcan
@@ -64,9 +71,20 @@
                                     <td>{{ $rekap->kompen }}</td>
                                     <td>
                                         @if ($rekap->kompen == 0)
-                                            <a href="{{ route('rekap.downloadPdf', $rekap->id) }}" class="btn btn-sm btn-success">Download PDF</a>
+                                        @cannot('index-admin')
+                                        <a href="{{ route('rekap.downloadPdf', $rekap->id) }}" class="btn btn-sm btn-success">Download PDF</a>
+                                        @endcannot
+                                            
                                         @endif
                                     </td>
+                                    @can('index-user')
+                                      <td>
+                                        @if ($rekap->kompen == 0)
+                                        <div class="badge badge-success">Tuntas</div>
+                                        @endif
+                                        
+                                      </td>
+                                    @endcan
                                     @can('index-user')
                                     <td>
                                         <a href="{{ route('rekap.edit', $rekap->id) }}" class="btn btn-sm btn-info btn-icon">
