@@ -23,9 +23,7 @@
                   
                 </div>
                 <div class="card-body">
-                  <div class="float-right"> 
-                    <a href="{{ route('input.tugas') }}" class="btn btn-primary">Tambah</a> 
-                  </div>
+                  <a href="{{ route('input.tugas') }}" class="btn btn-primary">Tambah</a> 
 
                   <div class="clearfix mb-3"></div>
 
@@ -56,10 +54,6 @@
                         <td>
                             <a href="{{ route('tugas.edit', $tugasItem->id) }}" class="btn btn-sm btn-info btn-icon"><i class="fas fa-edit"></i> Edit</a>
                             <a href="/input-tugas/delete/{{ $tugasItem->id }}" class="btn btn-sm btn-danger btn-icon confirm-delete"><i class="fas fa-times"></i> Delete</a>
-                            
-                            {{-- @if ($tugasItem->status == 'available')
-                                <a href="{{ route('cektugas.index') }}" class="btn btn-sm btn-success btn-icon">Cek Tugas</a>
-                            @endif --}}
                         </td>
                       </tr>
                       @empty
@@ -88,13 +82,5 @@
 @section('sidebar')
 @parent
 
-<li class="menu-header">Starter</li>
-              <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
-                <ul class="dropdown-menu">
-                  <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-                  <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-                  <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
-                </ul>
-              </li>
+
 @endsection

@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Tugas Dipilih')
+@section('title', 'Upload Bukti Tugas')
 
 @section('content')
 
 <section class="section">
     <div class="section-header">
-        <h1>Tugas Dipilih</h1>
+        <h1>Upload Bukti Tugas</h1>
     </div>
 
     <div class="section-body">
@@ -18,7 +18,7 @@
                 @csrf
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -36,7 +36,7 @@
                                         <td>{{ $task->tugas->waktu }}</td>
                                         <td>
                                             <input type="hidden" name="task_ids[]" value="{{ $task->id }}">
-                                            <input type="file" name="bukti_tugas[]">
+                                            <input type="file" name="bukti_tugas[]" class="form-control-file">
                                         </td>
                                     </tr>
                                     @php $counter++; @endphp

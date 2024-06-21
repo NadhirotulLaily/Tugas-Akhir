@@ -45,6 +45,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/input-rekap/store', [RekapController::class, 'store'])->name('rekap.store');
     Route::get('/rekap/{id}/edit', [RekapController::class, 'edit'])->name('rekap.edit');
     Route::put('/rekap/{id}/update', [RekapController::class, 'update'])->name('rekap.update');
+    Route::get('/rekap/search', [RekapController::class, 'search'])->name('rekap.search');
 
 
     // Tugas

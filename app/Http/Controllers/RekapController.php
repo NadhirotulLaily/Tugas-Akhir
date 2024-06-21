@@ -168,4 +168,17 @@ class RekapController extends Controller
 
         return Storage::download($path, $bebaskompen);
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $rekap = Rekap::where('nama', 'LIKE', "%{$query}%")
+                      ->orWhere('nim', 'LIKE', "%{$query}%")
+                      ->orWhere('semester', 'LIKE', "%{$query}%")
+                      ->orWhere('kompen', 'LIKE', "%{$query}%")
+                      ->get();
+
+        return view('rekap.index', compact('rekap'));
+    }
 }

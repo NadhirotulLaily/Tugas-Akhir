@@ -2585,6 +2585,11 @@ blockquote .blockquote-footer {
   display: none !important;
 }
 
+.sidebar-menu .nav-item.active > a {
+  color: #6777ef !important; /* Warna biru */
+}
+
+
 pre {
   border-radius: 3px;
 }

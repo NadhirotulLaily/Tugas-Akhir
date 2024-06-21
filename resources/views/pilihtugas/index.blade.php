@@ -22,7 +22,7 @@
                     <div class="clearfix mb-3"></div>
 
                     <div class="table-responsive">
-                        <form method="POST" action="{{ route('pilihtugas.process') }}" onsubmit="return confirm('Apakah Anda yakin ingin memilih tugas ini?')">
+                        <form id="tugasForm" method="POST" action="{{ route('pilihtugas.process') }}">
                             @csrf
                             <table class="table table-striped">
                                 <thead>
@@ -40,7 +40,13 @@
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $tugasItem->tugas }}</td>
                                             <td>{{ $tugasItem->waktu }}</td>
-                                            <td>{{ $tugasItem->status }}</td>
+                                            <td>
+                                                @if ($tugasItem->status == 'available')
+                                                    <span class="badge badge-success" style="color: white">{{ $tugasItem->status }}</span>
+                                                @else
+                                                    <span class="badge badge-danger" style="color: white">{{ $tugasItem->status }}</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <input type="checkbox" name="selected_tasks[]" value="{{ $tugasItem->id }}" {{ $tugasItem->status == 'unavailable' ? 'disabled' : '' }}>
                                             </td>
@@ -48,7 +54,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <button type="submit" class="btn btn-primary float-right">Pilih</button>
+                            <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#confirmModal">Pilih</button>
                         </form>
                     </div>
                 </div>
@@ -56,20 +62,30 @@
         </div>
     </div>
 </section>
-@endsection
 
+<!-- Modal Konfirmasi -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Konfirmasi Pemilihan Tugas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin memilih tugas ini?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary" onclick="document.getElementById('tugasForm').submit();">Ya, Pilih</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
 
 @section('sidebar')
 @parent
 
-<li class="menu-header">Starter</li>
-<li class="nav-item dropdown">
-    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
-    <ul class="dropdown-menu">
-        <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-        <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-        <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
-    </ul>
-</li>
 @endsection
-
