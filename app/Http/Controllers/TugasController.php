@@ -121,9 +121,14 @@ class TugasController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('tugas')->where('id',$id)->delete();
-        Alert::success('Berhasil', 'Tugas berhasil dihapus');
-        return redirect()->route('tugas.index');
+        try {
+            DB::table('tugas')->where('id', $id)->delete();
+            Alert::success('Berhasil', 'Tugas berhasil dihapus');
+            return redirect()->route('tugas.index');
+        } catch (\Exception $e) {
+            Alert::error('Gagal', 'Gagal menghapus tugas');
+            return redirect()->route('tugas.index');
+        }
     }
 
     public function uploadBukti(Request $request)

@@ -149,10 +149,14 @@ class RekapController extends Controller
     public function destroy($id)
     {
         
-        DB::table('rekap')->where('id',$id)->delete();
-        Alert::success('Berhasil', 'Data telah berhasil dihapus');
-        return redirect()->route('rekap.index');
-    } 
+        try {
+            Rekap::destroy($id);
+            Alert::success('Berhasil', 'Data telah berhasil dihapus');
+            return redirect()->route('rekap.index');
+        } catch (\Exception $e) {
+            return redirect()->route('rekap.index')->withErrors('Gagal menghapus data.');
+        }
+    }
 
     public function downloadPdf($id)
     {

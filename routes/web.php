@@ -41,6 +41,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('input.rekap'); 
     Route::get('/rekap', [RekapController::class, 'index'])->name('rekap.index');
     Route::get('/input-rekap', [RekapController::class, 'create'])->name('input.rekap');
+    Route::delete('/input-rekap/delete/{id}', [RekapController::class, 'destroy'])->name('rekap.destroy');
     Route::get('/input-rekap/delete/{id}', [RekapController::class, 'destroy'])->name('rekap.delete');
     Route::post('/input-rekap/store', [RekapController::class, 'store'])->name('rekap.store');
     Route::get('/rekap/{id}/edit', [RekapController::class, 'edit'])->name('rekap.edit');
@@ -59,7 +60,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/input-tugas/store', [TugasController::class, 'store'])->name('tugas.store');
     Route::get('/tugas/{id}/edit', [TugasController::class, 'edit'])->name('tugas.edit');
     Route::put('/tugas/{id}/update', [TugasController::class, 'update'])->name('tugas.update');
-    Route::get('/input-tugas/delete/{id}', [TugasController::class, 'destroy'])->name('tugas.delete');
+    Route::delete('/input-tugas/delete/{id}', [TugasController::class, 'destroy'])->name('tugas.delete');
     Route::post('/upload-bukti/{id}', [TugasController::class, 'uploadBukti'])->name('upload.bukti');
     Route::post('/proses-pilih-tugas', [TugasController::class, 'processPilihTugas'])->name('pilih.tugas');
 
