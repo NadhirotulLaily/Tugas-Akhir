@@ -28,25 +28,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @php $counter = 1; @endphp
+                                @php 
+                                    $counter = 1; 
+                                    $uploadedFiles = session('uploadedFiles', []);
+                                    $allFilesUploaded = session('allFilesUploaded', false);
+                                @endphp
                                 @foreach($selectedTasks as $task)
                                     <tr>
                                         <td>{{ $counter }}</td>
                                         <td>{{ $task->tugas->tugas }}</td>
                                         <td>{{ $task->tugas->waktu }}</td>
                                         <td>
-                                            <input type="hidden" name="task_ids[]" value="{{ $task->id }}">
-                                            <input type="file" name="bukti_tugas[]" class="form-control-file">
+                                            @if(isset($uploadedFiles[$task->id]))
+                                                <span>{{ $uploadedFiles[$task->id] }}</span>
+                                            @else
+                                                <input type="hidden" name="task_ids[]" value="{{ $task->id }}">
+                                                <input type="file" name="bukti_tugas[]" class="form-control-file" required>
+                                            @endif
                                         </td>
                                     </tr>
                                     @php $counter++; @endphp
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="card-footer text-right">
+                            @if(!$allFilesUploaded)
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-upload"></i> Kirim
+                                </button>
+                            @endif
+                        </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Kirim</button>
                 </div>
             </form>
         </div>

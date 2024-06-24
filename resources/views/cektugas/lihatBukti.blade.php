@@ -22,9 +22,9 @@
             <div class="card">
                 <div class="card-body text-center">
                     @if($tugasItem->bukti_tugas)
-                    <img src="{{ Storage::url($tugasItem->bukti_tugas) }}" alt="{{ $tugasItem->tugas->tugas }}" class="img-fluid">
+                        <img src="{{ Storage::url('public/bukti_tugas/' . $tugasItem->bukti_tugas) }}" alt="{{ $tugasItem->tugas->tugas }}" class="img-fluid">
                     @else
-                    <img src="{{ asset('storage/default.png')}}" alt="{{ $tugasItem->tugas->tugas }}">
+                        <img src="{{ asset('storage/default.png') }}" alt="{{ $tugasItem->tugas->tugas }}" class="img-fluid">
                     @endif
                 </div>
             </div>

@@ -42,18 +42,32 @@ class CektugasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StorePilihTugasRequest $request)
-    {
-        $bukti_tugas_files = $request->file('bukti_tugas');
+{
+    $bukti_tugas_files = $request->file('bukti_tugas');
+    $uploadedFiles = [];
 
-        foreach ($bukti_tugas_files as $index => $file) {
-            $path = $file->store('public/bukti_tugas');
-            $selectedTask = PilihTugas::find($request->input('task_ids')[$index]);
-            $selectedTask->bukti_tugas = $path;
-            $selectedTask->save();
-        }
-        Alert::success('Berhasil', 'File Berhasil Upload');
-        return redirect()->route('pilihtugas.upload')->with('success', 'File uploaded successfully.');
+    foreach ($bukti_tugas_files as $index => $file) {
+        // Buat nama file unik dengan menambahkan timestamp
+        $filename = time() . '_' . $file->getClientOriginalName();
+        // Simpan file ke folder 'public/bukti_tugas'
+        $path = $file->storeAs('public/bukti_tugas', $filename);
+
+        // Temukan tugas yang dipilih berdasarkan ID
+        $selectedTask = PilihTugas::find($request->input('task_ids')[$index]);
+        // Simpan nama file ke dalam database
+        $selectedTask->bukti_tugas = $filename;
+        $selectedTask->save();
+
+        // Tambahkan nama file ke array $uploadedFiles
+        $uploadedFiles[$selectedTask->id] = $filename;
     }
+
+    // Tampilkan alert sukses
+    Alert::success('Berhasil', 'File Berhasil Upload');
+    // Redirect kembali ke halaman upload dengan nama file yang diunggah
+    return redirect()->route('pilihtugas.upload')->with('uploadedFiles', $uploadedFiles)->with('allFilesUploaded', true);
+}
+
 
     /**
      * Display the specified resource.
