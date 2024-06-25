@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('tugas_id')->constrained('tugas');
             $table->string('email'); // Menggunakan email sebagai foreign key
             $table->string('bukti_tugas')->nullable();
+            $table->string('status_verifikasi')->nullable();
             $table->timestamps();
 
             // Menambahkan foreign key constraint ke users berdasarkan email

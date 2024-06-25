@@ -49,13 +49,23 @@
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                        <!-- Form untuk memicu update -->
-                                        <form action="{{ route('cektugas.update', $tugasItem->id) }}" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
-                                        </form>
-                                        <button type="submit" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                            @if($tugasItem->status_verifikasi == 'Terverifikasi')
+                                                <button class="btn btn-success" disabled><i class="fas fa-check"></i> Terverifikasi</button>
+                                            @elseif($tugasItem->status_verifikasi == 'Tidak Terverifikasi')
+                                                <button class="btn btn-danger" disabled><i class="fas fa-times"></i> Tidak Terverifikasi</button>
+                                            @else
+                                                <form action="{{ route('cektugas.update', $tugasItem->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input type="hidden" name="verifikasi" value="true">
+                                                    <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
+                                                </form>
+                                                <form action="{{ route('cektugas.update', $tugasItem->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                </form>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
@@ -64,7 +74,7 @@
                                     <td colspan="5">Tidak ada tugas yang tersedia.</td>
                                 </tr>
                                 @endforelse
-                            </tbody>
+                            </tbody>                                                   
                         </table>
                     </div>
                 </div>
@@ -77,13 +87,4 @@
 @section('sidebar')
 @parent
 
-<li class="menu-header">Starter</li>
-<li class="nav-item dropdown">
-    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
-    <ul class="dropdown-menu">
-        <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-        <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-        <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
-    </ul>
-</li>
 @endsection

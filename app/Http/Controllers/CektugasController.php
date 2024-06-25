@@ -56,6 +56,7 @@ class CektugasController extends Controller
         $selectedTask = PilihTugas::find($request->input('task_ids')[$index]);
         // Simpan nama file ke dalam database
         $selectedTask->bukti_tugas = $filename;
+        $selectedTask->status_verifikasi = 'Belum diverifikasi'; // Set default status
         $selectedTask->save();
 
         // Tambahkan nama file ke array $uploadedFiles
@@ -99,30 +100,33 @@ class CektugasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-{
-    // Temukan data PilihTugas berdasarkan ID
-    $pilihTugas = PilihTugas::findOrFail($id);
-    $email = $pilihTugas->email;
+    {
+        $pilihTugas = PilihTugas::findOrFail($id);
+        $email = $pilihTugas->email;
 
-    // Temukan rekaman rekap yang sesuai berdasarkan email
-    $rekap = Rekap::where('email', $email)->firstOrFail();
+        if ($request->has('verifikasi')) {
+            $rekap = Rekap::where('email', $email)->firstOrFail();
+            $waktu = $pilihTugas->tugas->waktu;
+            $rekap->kompen -= $waktu;
+            $rekap->save();
+            $pilihTugas->status_verifikasi = 'Terverifikasi';
+        } else {
+            $pilihTugas->status_verifikasi = 'Tidak Terverifikasi';
+        }
 
-    // Ambil nilai waktu dari tugas yang terkait
-    $waktu = $pilihTugas->tugas->waktu;
+        // Update nama file bukti tugas jika ada
+        if ($pilihTugas->bukti_tugas) {
+            $filename = $pilihTugas->bukti_tugas;
+            $pilihTugas->bukti_tugas = $filename;
+        }
 
-    // Kurangi nilai kompen di rekapan
-    $rekap->kompen -= $waktu;
+        $pilihTugas->save();
 
-    // Simpan rekapan yang sudah diperbarui
-    $rekap->save();
+        Alert::success('Berhasil', 'Tugas berhasil diverifikasi.');
 
-    $pilihTugas->delete();
+        return redirect()->route('cektugas.index')->with('success', 'Tugas berhasil diverifikasi.');
+    }
 
-    Alert::success('Berhasil', 'Verifikasi Berhasil');
-
-    // Redirect kembali atau ke rute lain sesuai kebutuhan
-    return redirect()->route('cektugas.index')->with('success', 'Kompen berhasil diperbarui.');
-}
 
 
     /**

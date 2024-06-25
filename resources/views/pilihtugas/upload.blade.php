@@ -25,6 +25,7 @@
                                     <th>Tugas</th>
                                     <th>Waktu</th>
                                     <th>Bukti Tugas</th>
+                                    <th>Status Verifikasi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,15 +42,26 @@
                                         <td>
                                             @if(isset($uploadedFiles[$task->id]))
                                                 <span>{{ $uploadedFiles[$task->id] }}</span>
+                                            @elseif($task->status_verifikasi == 'Terverifikasi' || $task->status_verifikasi == 'Tidak Terverifikasi')
+                                                <span>{{ $task->bukti_tugas }}</span>
                                             @else
                                                 <input type="hidden" name="task_ids[]" value="{{ $task->id }}">
                                                 <input type="file" name="bukti_tugas[]" class="form-control-file" required>
                                             @endif
                                         </td>
+                                        <td>
+                                            @if($task->status_verifikasi == 'Terverifikasi')
+                                                <span class="badge badge-success">{{ $task->status_verifikasi }}</span>
+                                            @elseif($task->status_verifikasi == 'Tidak Terverifikasi')
+                                                <span class="badge badge-danger">{{ $task->status_verifikasi }}</span>
+                                            @else
+                                                <span class="badge badge-warning">{{ $task->status_verifikasi }}</span>
+                                            @endif
+                                        </td>
                                     </tr>
                                     @php $counter++; @endphp
                                 @endforeach
-                            </tbody>
+                            </tbody>                            
                         </table>
                         <div class="card-footer text-right">
                             @if(!$allFilesUploaded)

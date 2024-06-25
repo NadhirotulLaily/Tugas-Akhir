@@ -15,6 +15,11 @@ class pilihtugas extends Model
         'email',
         'tugas_id',
         'bukti_tugas',
+        'status_verifikasi'
+    ];
+
+    protected $attributes = [
+        'status_verifikasi' => 'Belum diverifikasi',
     ];
 
     public function tugas()
