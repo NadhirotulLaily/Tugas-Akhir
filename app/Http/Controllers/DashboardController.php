@@ -24,7 +24,7 @@ class DashboardController extends Controller
 
         // Menginisialisasi variabel untuk data yang akan ditampilkan di dashboard
         $totalKompen = 0;
-        $totalTugas = 0;
+        $totalMahasiswaKompen = 0;
         $availableTugas = 0;
         $unavailableTugas = 0;
 
@@ -32,19 +32,19 @@ class DashboardController extends Controller
         if ($user->role == 'superadmin') {
             // Jika user adalah superadmin, hitung total rekap dan tugas dari semua pengguna
             $totalKompen = Rekap::sum('kompen');
-            $totalTugas = PilihTugas::count();
+            $totalMahasiswaKompen = Rekap::distinct('email')->count('email');
             $availableTugas = Tugas::where('status', 'available')->count();
             $unavailableTugas = Tugas::where('status', 'unavailable')->count();
         } else {
             // Jika bukan superadmin, hitung total rekap dan tugas hanya untuk pengguna yang sedang login
             $totalKompen = Rekap::where('email', $user->email)->sum('kompen');
-            $totalTugas = PilihTugas::where('email', $user->email)->count();
+            $totalMahasiswaKompen = Rekap::where('email', $user->email)->distinct('email')->count('email');
             $availableTugas = Tugas::where('status', 'available')->count();
             $unavailableTugas = Tugas::where('status', 'unavailable')->count();
         }
 
         // Tampilkan dashboard dengan data yang sudah dihitung
-        return view('dashboard.index', compact('totalKompen', 'totalTugas', 'availableTugas', 'unavailableTugas'));
+        return view('dashboard.index', compact('totalKompen', 'totalMahasiswaKompen', 'availableTugas', 'unavailableTugas'));
     }
 
     
