@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Milda Khusnul Khatimah',
+            'name' => 'Milda Khusnul Khotimah',
             'email' => '2131740026@gmail.com',
             'email_verified_at' => now(),
             'role' => 'user',

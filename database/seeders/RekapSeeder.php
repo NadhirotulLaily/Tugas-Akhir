@@ -26,10 +26,10 @@ class RekapSeeder extends Seeder
 
         rekap::create([
             'nama' => 'Milda Khusnul Khotimah',
-            'nim' => '2131740006',
+            'nim' => '2131740026',
             'semester' => '6',
             'kompen' => '2',
-            'email' => 'milda@gmail.com',
+            'email' => '2131740026@gmail.com',
         ]);
 
         Rekap::create([
