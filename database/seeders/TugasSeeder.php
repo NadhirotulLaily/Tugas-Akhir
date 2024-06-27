@@ -16,6 +16,25 @@ class TugasSeeder extends Seeder
     public function run()
     {
         //
-        Tugas::factory()->count(10)->create();
+        // Tugas::factory()->count(10)->create();
+
+        Tugas::create([
+            'Tugas' => 'Melakukan installasi Apikasi pada Lab A',
+            'Waktu' => 6,
+            'Status' => 'available',
+        ]);
+
+        Tugas::create([
+            'Tugas' => 'Membersihkan Ruang Lab C dan Lab B',
+            'Waktu' => 2,
+            'Status' => 'available',
+        ]);
+
+        Tugas::create([
+            'Tugas' => 'Menerjemahkan Jurnal',
+            'Waktu' => 4,
+            'Status' => 'available',
+        ]);
+
     }
 }

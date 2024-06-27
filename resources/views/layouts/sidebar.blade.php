@@ -12,11 +12,11 @@
             <a href="{{ route('home') }}" class="nav-link"><i class="fas fa-home"></i><span>Dashboard</span></a>
         </li>
         
-        @can('index-user')
+        {{-- @can('index-user')
         <li class="nav-item dropdown {{ Route::is('user.index') ? 'active' : '' }}">
             <a href="{{ route('user.index') }}" class="nav-link"><i class="fas fa-users"></i><span>User List</span></a>
         </li>
-        @endcan
+        @endcan --}}
         
         @can('index-rekap')
         <li class="nav-item dropdown {{ Route::is('rekap.index') ? 'active' : '' }}">

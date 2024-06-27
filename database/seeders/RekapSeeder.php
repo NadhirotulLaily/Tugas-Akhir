@@ -32,5 +32,45 @@ class RekapSeeder extends Seeder
             'email' => 'milda@gmail.com',
         ]);
 
+        Rekap::create([
+            'nama' => 'Agfinita Gusti Hikmawani',
+            'nim' => '2131740006',
+            'semester' => '4',
+            'kompen' => '6',
+            'email' => '2131740006@gmail.com',
+        ]);
+
+        Rekap::create([
+            'nama' => 'Rizky Putri Meilia',
+            'nim' => '2131740024',
+            'semester' => '4',
+            'kompen' => '1',
+            'email' => '2131740024@gmail.com',
+        ]);
+
+        Rekap::create([
+            'nama' => 'Nurul Hikmah',
+            'nim' => '2131740020',
+            'semester' => '2',
+            'kompen' => '8',
+            'email' => '2131740020@gmail.com',
+        ]);
+
+        Rekap::create([
+            'nama' => 'Neisha Rindiani Armilia',
+            'nim' => '2131740035',
+            'semester' => '2',
+            'kompen' => '5',
+            'email' => '2131740035@gmail.com',
+        ]);
+
+        Rekap::create([
+            'nama' => 'Fira Ila Nufika',
+            'nim' => '2131740035',
+            'semester' => '5',
+            'kompen' => '3',
+            'email' => '2131740015@gmail.com',
+        ]);
+
     }
 }
