@@ -6,7 +6,7 @@
 
     <section class="section">
         <div class="section-header">
-            <h1>Edit Profile</h1>
+            <h1>Edit Password</h1>
         </div>
 
         <div class="section-body">
@@ -17,59 +17,13 @@
 
             <div class="row mt-sm-4">
                 <div class="col-12 col-md-12 col-lg-5">
-                    <div class="card profile-widget">
-                        <div class="profile-widget-header">
-                            <img alt="image" src="../assets/img/avatar/avatar-1.png"
-                                class="rounded-circle profile-widget-picture">
-                            <div class="profile-widget-items">
-                                <div class="profile-widget-item">
-                                    <div class="profile-widget-item-label">Posts</div>
-                                    <div class="profile-widget-item-value">187</div>
-                                </div>
-                                <div class="profile-widget-item">
-                                    <div class="profile-widget-item-label">Followers</div>
-                                    <div class="profile-widget-item-value">6,8K</div>
-                                </div>
-                                <div class="profile-widget-item">
-                                    <div class="profile-widget-item-label">Following</div>
-                                    <div class="profile-widget-item-value">2,1K</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="profile-widget-description">
-                            <div class="profile-widget-name">{{ auth()->user()->name }} <div
-                                    class="text-muted d-inline font-weight-normal">
-                                    <div class="slash"></div> Web Developer
-                                </div>
-                            </div>
-                            {{ auth()->user()->bio }}
-                        </div>
-                        <div class="card-footer text-center">
-                            <div class="font-weight-bold mb-2">Follow {{ auth()->user()->name }} On</div>
-                            <a href="#" class="btn btn-social-icon btn-facebook mr-1">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="btn btn-social-icon btn-twitter mr-1">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="btn btn-social-icon btn-github mr-1">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="btn btn-social-icon btn-instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-
-                        </div>
-                    </div>
                     <div class="card">
                         <form method="POST" action="{{ route('user-password.update') }}" class="needs-validation"
                             novalidate="">
                             @csrf
                             @method('PUT')
 
-                            <div class="card-header">
-                                <h4>Edit Password</h4>
-                            </div>
+                            
                             <div class="card-body">
                                 <div class="row">
                                     <div class="form-group col-md-6 col-12">
@@ -117,79 +71,6 @@
                             </div>
                             <div class="card-footer text-right">
                                 <button class="btn btn-primary" type="submit">Changes Password</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-12 col-lg-7">
-                    <div class="card">
-                        <form method="POST" action="{{ route('user-profile-information.update') }}"
-                            class="needs-validation" novalidate="">
-                            @csrf
-                            @method('PUT')
-
-                            <div class="card-header">
-                                <h4>Edit Profile</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="form-group col-md-6 col-12">
-                                        <label>Name</label>
-                                        <input name="name" type="text"
-                                            class="form-control @error('name','updateProfileInformation')
-                                is-invalid
-                            @enderror"
-                                            value="{{ auth()->user()->name }}">
-                                        @error('name', 'updateProfileInformation')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group col-md-6 col-12">
-                                        <label>Email</label>
-                                        <input name="email"
-                                            class="form-control @error('email', 'updateProfileInformation') is-invalid @enderror"
-                                            value="{{ Auth::user()->email }}">
-                                        @error('email', 'updateProfileInformation')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-6 col-12">
-                                        <label>Phone</label>
-                                        <input name="phone" type="tel"
-                                            class="form-control @error('phone', 'updateProfileInformation')
-                                is-invalid
-                            @enderror"
-                                            value="{{ auth()->user()->phone }}">
-                                        @error('phone', 'updateProfileInformation')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-12">
-                                        <label>Bio</label>
-                                        <textarea name="bio" class="form-control summernote-simple">
-                                {{ auth()->user()->bio }}
-                            </textarea>
-                                        @error('bio', 'updateProfileInformation')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer text-right">
-                                <button class="btn btn-primary" type="submit">Changes Profile</button>
                             </div>
                         </form>
                     </div>

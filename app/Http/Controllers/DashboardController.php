@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Rekap;
 use App\Models\PilihTugas;
 use App\Models\User;
-use App\Models\tugas;
+use App\Models\Tugas;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class DashboardController extends Controller
@@ -27,6 +27,8 @@ class DashboardController extends Controller
         $totalMahasiswaKompen = 0;
         $availableTugas = 0;
         $unavailableTugas = 0;
+        $verifiedTugas = 0;
+        $unverifiedTugas = 0;
 
         // Logika untuk menentukan data yang ditampilkan berdasarkan role user
         if ($user->role == 'superadmin') {
@@ -35,82 +37,105 @@ class DashboardController extends Controller
             $totalMahasiswaKompen = Rekap::distinct('email')->count('email');
             $availableTugas = Tugas::where('status', 'available')->count();
             $unavailableTugas = Tugas::where('status', 'unavailable')->count();
+            $verifiedTugas = PilihTugas::where('status_verifikasi', 'verified')->count();
+            $unverifiedTugas = PilihTugas::where('status_verifikasi', '!=', 'verified')->count();
         } else {
             // Jika bukan superadmin, hitung total rekap dan tugas hanya untuk pengguna yang sedang login
             $totalKompen = Rekap::where('email', $user->email)->sum('kompen');
             $totalMahasiswaKompen = Rekap::where('email', $user->email)->distinct('email')->count('email');
             $availableTugas = Tugas::where('status', 'available')->count();
             $unavailableTugas = Tugas::where('status', 'unavailable')->count();
+            $verifiedTugas = PilihTugas::where('email', $user->email)->where('status_verifikasi', 'verified')->count();
+            $unverifiedTugas = PilihTugas::where('email', $user->email)->where('status_verifikasi', '!=', 'verified')->count();
         }
+
+        // Hitung jumlah mahasiswa dengan kompen 0 dan tidak 0
+        $mahasiswaKompenZero = Rekap::select('email')
+                                    ->groupBy('email')
+                                    ->havingRaw('SUM(kompen) = 0')
+                                    ->count();
+        $mahasiswaKompenNonZero = Rekap::select('email')
+                                       ->groupBy('email')
+                                       ->havingRaw('SUM(kompen) > 0')
+                                       ->count();
 
         // Tampilkan dashboard dengan data yang sudah dihitung
-        return view('dashboard.index', compact('totalKompen', 'totalMahasiswaKompen', 'availableTugas', 'unavailableTugas'));
+        return view('dashboard.index', compact(
+            'totalKompen', 
+            'totalMahasiswaKompen', 
+            'availableTugas', 
+            'unavailableTugas', 
+            'verifiedTugas', 
+            'unverifiedTugas', 
+            'mahasiswaKompenZero', 
+            'mahasiswaKompenNonZero'
+        ));
+    
     }
 
-    
-        /**
-         * Show the form for creating a new resource.
-         *
-         * @return \Illuminate\Http\Response
-         */
-        public function create()
-        {
-            //
-        }
-    
-        /**
-         * Store a newly created resource in storage.
-         *
-         * @param  \Illuminate\Http\Request  $request
-         * @return \Illuminate\Http\Response
-         */
-        public function store(Request $request)
-        {
-            //
-        }
-    
-        /**
-         * Display the specified resource.
-         *
-         * @param  int  $id
-         * @return \Illuminate\Http\Response
-         */
-        public function show($id)
-        {
-            //
-        }
-    
-        /**
-         * Show the form for editing the specified resource.
-         *
-         * @param  int  $id
-         * @return \Illuminate\Http\Response
-         */
-        public function edit($id)
-        {
-            //
-        }
-    
-        /**
-         * Update the specified resource in storage.
-         *
-         * @param  \Illuminate\Http\Request  $request
-         * @param  int  $id
-         * @return \Illuminate\Http\Response
-         */
-        public function update(Request $request, $id)
-        {
-            //
-        }
-    
-        /**
-         * Remove the specified resource from storage.
-         *
-         * @param  int  $id
-         * @return \Illuminate\Http\Response
-         */
-        public function destroy($id)
-        {
-            //
-        }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 }

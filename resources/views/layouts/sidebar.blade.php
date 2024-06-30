@@ -20,7 +20,7 @@
         
         @can('index-rekap')
         <li class="nav-item dropdown {{ Route::is('rekap.index') ? 'active' : '' }}">
-            <a href="{{ route('rekap.index') }}" class="nav-link"><i class="fas fa-book"></i><span>Ketersediaan Kompen</span></a>
+            <a href="{{ route('rekap.index') }}" class="nav-link"><i class="fas fa-book"></i><span>Data Kompen</span></a>
         </li>
         @endcan
         

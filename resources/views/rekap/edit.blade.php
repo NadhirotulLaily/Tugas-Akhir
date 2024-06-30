@@ -9,7 +9,7 @@
         <a href="{{ route('rekap.index') }}" style="margin-right: 10px;">
             <i class="fas fa-chevron-left" style="font-size: 1.5em; vertical-align: middle;"></i>
         </a>
-        <h1 style="display: inline-block; vertical-align: middle;">Edit Data Rekap</h1>
+        <h1 style="display: inline-block; vertical-align: middle;">Edit Data Kompen</h1>
     </div>
 
   <div class="section-body">
