@@ -29,6 +29,7 @@ class DashboardController extends Controller
         $unavailableTugas = 0;
         $verifiedTugas = 0;
         $unverifiedTugas = 0;
+        $notVerifiedTugas = 0;
 
         // Logika untuk menentukan data yang ditampilkan berdasarkan role user
         if ($user->role == 'superadmin') {
@@ -37,16 +38,18 @@ class DashboardController extends Controller
             $totalMahasiswaKompen = Rekap::distinct('email')->count('email');
             $availableTugas = Tugas::where('status', 'available')->count();
             $unavailableTugas = Tugas::where('status', 'unavailable')->count();
-            $verifiedTugas = PilihTugas::where('status_verifikasi', 'verified')->count();
-            $unverifiedTugas = PilihTugas::where('status_verifikasi', '!=', 'verified')->count();
+            $verifiedTugas = PilihTugas::where('status_verifikasi', 'Terverifikasi')->count();
+            $unverifiedTugas = PilihTugas::where('status_verifikasi', 'Belum diverifikasi')->count();
+            $notVerifiedTugas = PilihTugas::where('status_verifikasi', 'Tidak Terverifikasi')->count();
         } else {
             // Jika bukan superadmin, hitung total rekap dan tugas hanya untuk pengguna yang sedang login
             $totalKompen = Rekap::where('email', $user->email)->sum('kompen');
-            $totalMahasiswaKompen = Rekap::where('email', $user->email)->distinct('email')->count('email');
+            $totalMahasiswaKompen = Rekap::distinct('email')->count('email');
             $availableTugas = Tugas::where('status', 'available')->count();
             $unavailableTugas = Tugas::where('status', 'unavailable')->count();
-            $verifiedTugas = PilihTugas::where('email', $user->email)->where('status_verifikasi', 'verified')->count();
-            $unverifiedTugas = PilihTugas::where('email', $user->email)->where('status_verifikasi', '!=', 'verified')->count();
+            $verifiedTugas = PilihTugas::where('email', $user->email)->where('status_verifikasi', 'Terverifikasi')->count();
+            $unverifiedTugas = PilihTugas::where('email', $user->email)->where('status_verifikasi', 'Belum diverifikasi')->count();
+            $notVerifiedTugas = PilihTugas::where('email', $user->email)->where('status_verifikasi', 'Tidak Terverifikasi')->count();
         }
 
         // Hitung jumlah mahasiswa dengan kompen 0 dan tidak 0
@@ -67,9 +70,12 @@ class DashboardController extends Controller
             'unavailableTugas', 
             'verifiedTugas', 
             'unverifiedTugas', 
+            'notVerifiedTugas', 
             'mahasiswaKompenZero', 
             'mahasiswaKompenNonZero'
         ));
+
+
     
     }
 

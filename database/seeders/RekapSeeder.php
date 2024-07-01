@@ -21,7 +21,7 @@ class RekapSeeder extends Seeder
             'nim' => '2131740041',
             'semester' => '6',
             'kompen' => '4',
-            'email' => 'mahasiswa@gmail.com',
+            'email' => '2131740041@gmail.com',
         ]);
 
         rekap::create([

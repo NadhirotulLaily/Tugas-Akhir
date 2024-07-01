@@ -87,7 +87,7 @@
                 <div class="card">
                     <div class="card-header">Diagram Verifikasi Tugas</div>
                     <div class="card-body">
-                        <canvas id="verifikasiChart" width="300" height=""></canvas>
+                        <canvas id="verifikasiChart" width="400" height="300"></canvas>
                     </div>
                 </div>
             </div>
@@ -133,27 +133,22 @@ document.addEventListener("DOMContentLoaded", function() {
     var verifikasiChart = new Chart(ctxVerifikasi, {
         type: 'pie',
         data: {
-            labels: ['Tugas Terverifikasi', 'Tugas Belum Terverifikasi'],
+            labels: ['Tugas Terverifikasi', 'Tugas Belum Terverifikasi', 'Tugas Tidak Terverifikasi'],
             datasets: [{
                 label: 'Jumlah Tugas',
-                data: [{{ $verifiedTugas }}, {{ $unverifiedTugas }}],
+                data: [{{ $verifiedTugas }}, {{ $unverifiedTugas }}, {{ $notVerifiedTugas }}],
                 backgroundColor: [
                     'rgba(75, 192, 192, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)'
                 ],
                 borderColor: [
                     'rgba(75, 192, 192, 1)',
-                    'rgba(255, 159, 64, 1)'
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)'
                 ],
                 borderWidth: 1
             }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
         }
     });
 });
