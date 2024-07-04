@@ -107,9 +107,21 @@ class CektugasController extends Controller
         if ($request->has('verifikasi')) {
             $rekap = Rekap::where('email', $email)->firstOrFail();
             $waktu = $pilihTugas->tugas->waktu;
-            $rekap->kompen -= $waktu;
-            $rekap->save();
-            $pilihTugas->status_verifikasi = 'Terverifikasi';
+
+            // Cek apakah kompen lebih besar dari 0 sebelum mengurangi
+            if ($rekap->kompen > 0) {
+                $rekap->kompen -= $waktu;
+
+                // Pastikan kompen tidak kurang dari 0
+                if ($rekap->kompen < 0) {
+                    $rekap->kompen = 0;
+                }
+
+                $rekap->save();
+                $pilihTugas->status_verifikasi = 'Terverifikasi';
+            } else {
+                return redirect()->route('cektugas.index')->with('error', 'Kompen sudah tuntas, tidak dapat diverifikasi.');
+            }
         } else {
             $pilihTugas->status_verifikasi = 'Tidak Terverifikasi';
         }
@@ -122,9 +134,9 @@ class CektugasController extends Controller
 
         $pilihTugas->save();
 
-        Alert::success('Berhasil', 'Tugas berhasil diverifikasi.');
+        Alert::success('Berhasil', 'Berhasil melakukan verifikasi.');
 
-        return redirect()->route('cektugas.index')->with('success', 'Tugas berhasil diverifikasi.');
+        return redirect()->route('cektugas.index')->with('success', 'Berhasil melakukan verifikasi.');
     }
 
 

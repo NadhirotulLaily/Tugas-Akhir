@@ -12,12 +12,11 @@
         <h1 style="display: inline-block; vertical-align: middle;">Cek Tugas</h1>
     </div>
 
-    <div class="section-body">
-        <h2 class="section-title">Posts</h2>
-        <p class="section-lead">
-            You can manage all posts, such as editing, deleting and more.
-        </p>
-    </div>
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="row mt-4">
         <div class="col-12">
             <div class="card">
@@ -48,26 +47,31 @@
                                         <a href="{{ route('cektugas.lihatBukti', $tugasItem->id) }}" class="btn btn-info"><i class="fas fa-eye"></i> Lihat Bukti</a>
                                     </td>
                                     <td>
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            @if($tugasItem->status_verifikasi == 'Terverifikasi')
-                                                <button class="btn btn-success" disabled><i class="fas fa-check"></i> Terverifikasi</button>
-                                            @elseif($tugasItem->status_verifikasi == 'Tidak Terverifikasi')
-                                                <button class="btn btn-danger" disabled><i class="fas fa-times"></i> Tidak Terverifikasi</button>
+                                        @if($tugasItem->status_verifikasi == 'Terverifikasi')
+                                            <span class="badge badge-success" style="color: white;"> Terverifikasi</span>
+                                        @elseif($tugasItem->status_verifikasi == 'Tidak Terverifikasi')
+                                            <span class="badge badge-danger" style="color: white;"> Tidak Terverifikasi</span>
+                                        @else
+                                            @if($tugasItem->bukti_tugas)
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <form action="{{ route('cektugas.update', $tugasItem->id) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <input type="hidden" name="verifikasi" value="true">
+                                                        <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
+                                                    </form>
+                                                    <form action="{{ route('cektugas.update', $tugasItem->id) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                    </form>
+                                                </div>
                                             @else
-                                                <form action="{{ route('cektugas.update', $tugasItem->id) }}" method="POST" style="display: inline;">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <input type="hidden" name="verifikasi" value="true">
-                                                    <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
-                                                </form>
-                                                <form action="{{ route('cektugas.update', $tugasItem->id) }}" method="POST" style="display: inline;">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <button type="submit" class="btn btn-danger"><i class="fas fa-times"></i></button>
-                                                </form>
+                                                <span class="badge badge-warning" style="color: white;">Bukti tugas belum dikirim</span>
                                             @endif
-                                        </div>
+                                        @endif
                                     </td>
+                                    
                                 </tr>
                                 @empty
                                 <tr>

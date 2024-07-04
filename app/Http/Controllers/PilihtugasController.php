@@ -17,10 +17,8 @@ class PilihtugasController extends Controller
      */
     public function index()
     {
-        // 
         $tugas = Tugas::all();
-        
-        // Kembalikan tampilan index dengan tugas-tugas yang tersedia
+
         return view('pilihtugas.index', compact('tugas'));
     
     }
@@ -43,11 +41,7 @@ class PilihtugasController extends Controller
      */
     public function create()
     {
-        // // Ambil daftar tugas yang tersedia
-        // $availableTasks = Tugas::whereNotIn('id', pilihtugas::pluck('tugas_id'))->get();
-        
-        // // Kembalikan tampilan create dengan daftar tugas yang tersedia
-        // return view('pilihtugas.create', compact('availableTasks'));
+        //
     }
 
     /**

@@ -8,13 +8,6 @@
         <h1>Rekap Kompen</h1>
     </div>
 
-    <div class="section-body">
-        <h2 class="section-title">Posts</h2>
-        <p class="section-lead">
-            You can manage all posts, such as editing, deleting, and more.
-        </p>
-    </div>
-
     <div class="row mt-4">
         <div class="col-12">
             <div class="card">
@@ -62,7 +55,7 @@
                             <tbody>
                                 @forelse ($rekap as $index => $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $rekap->firstItem() + $index }}</td>
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->nim }}</td>
                                     <td>{{ $item->semester }}</td>
@@ -106,7 +99,7 @@
                     </div>
                     <div class="float-right">
                         <nav>
-                            {{-- Pagination Links --}}
+                            {{ $rekap->links() }}
                         </nav>
                     </div>
                 </div>

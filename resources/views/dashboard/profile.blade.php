@@ -12,7 +12,7 @@
         <div class="section-body">
             <h2 class="section-title">Hi, {{ auth()->user()->name }} !</h2>
             <p class="section-lead">
-                Change information about yourself on this page.
+                Change password on this page.
             </p>
 
             <div class="row mt-sm-4">
@@ -80,20 +80,6 @@
     </section>
 @endsection
 
-@section('sidebar')
-    @parent
-
-    <li class="menu-header">Starter</li>
-    <li class="nav-item dropdown">
-        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
-            <span>Layout</span></a>
-        <ul class="dropdown-menu">
-            <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-            <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-            <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
-        </ul>
-    </li>
-@endsection
 
 @push('customCss')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css">

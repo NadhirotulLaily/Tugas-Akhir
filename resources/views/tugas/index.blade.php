@@ -1,19 +1,12 @@
 @extends('layouts.app')
 
-@section('title','Tugas')
+@section('title', 'Tugas')
 
 @section('content')
 
 <section class="section">
     <div class="section-header">
         <h1>Tugas</h1>
-    </div>
-
-    <div class="section-body">
-        <h2 class="section-title">Posts</h2>
-        <p class="section-lead">
-            You can manage all posts, such as editing, deleting and more.
-        </p>
     </div>
 
     <div class="row mt-4">
@@ -41,7 +34,7 @@
                             <tbody>
                                 @forelse ($tugas as $index => $tugasItem)
                                 <tr>
-                                    <td>{{ $loop->index + 1 }}</td>
+                                    <td>{{ $tugas->firstItem() + $index }}</td>
                                     <td>{{ $tugasItem->tugas }}</td>
                                     <td>{{ $tugasItem->waktu }}</td>
                                     <td>
@@ -101,7 +94,6 @@
                   @method('DELETE')
                   <button type="submit" class="btn btn-danger">Hapus</button>
               </form>
-                                          
             </div>
         </div>
     </div>

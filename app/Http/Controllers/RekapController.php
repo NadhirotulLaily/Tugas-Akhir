@@ -20,27 +20,18 @@ class RekapController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        // Mengambil user yang sedang login
         $user = Auth::user();
 
         // Mengambil data rekap yang terkait dengan user yang sedang login
         if ($user->role == 'superadmin') {
-            // Jika admin, ambil semua data rekap
-            $rekap = Rekap::all();
+            $rekap = Rekap::paginate(10); 
         } else {
-            // Jika bukan admin, ambil data rekap berdasarkan email pengguna
-            $rekap = $user->rekaps()->get();
+            $rekap = $user->rekaps()->paginate(10); 
         }
 
-        //$rekap = DB::table('rekap')
-        // ->when($request->input('search'),function ($query, $search){
-        //     $query->where('nama','like','%'.$search.'%')
-        //     ->orWhere('semester','like','%'.$search.'%');
-        // })
-        // ->paginate(10);
-        return view ('rekap.index', compact ('rekap'));
+        return view('rekap.index', compact('rekap'));
     }
+
 
     /**
      * Show the form for creating a new resource.

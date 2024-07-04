@@ -3,6 +3,7 @@
 @section('title', 'Lihat Bukti Tugas')
 
 @section('content')
+
 <section class="section">
     <div class="section-header">
         <a href="{{ route('cektugas.index') }}" style="margin-right: 10px;">
