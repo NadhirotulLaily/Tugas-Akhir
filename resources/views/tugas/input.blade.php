@@ -9,7 +9,7 @@
         <a href="{{ route('tugas.index') }}" style="margin-right: 10px;">
             <i class="fas fa-chevron-left" style="font-size: 1.5em; vertical-align: middle;"></i>
         </a>
-        <h1 style="display: inline-block; vertical-align: middle;">Create Tugas</h1>
+        <h1 style="display: inline-block; vertical-align: middle;">Input Tugas</h1>
     </div>
 
   <div class="section-body">
