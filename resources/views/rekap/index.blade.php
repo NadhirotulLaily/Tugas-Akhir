@@ -5,7 +5,7 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Rekap Kompen</h1>
+        <h1>Data Kompen</h1>
     </div>
 
     <div class="row mt-4">
