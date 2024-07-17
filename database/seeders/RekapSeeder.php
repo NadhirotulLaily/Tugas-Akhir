@@ -66,7 +66,7 @@ class RekapSeeder extends Seeder
 
         Rekap::create([
             'nama' => 'Fira Ila Nufika',
-            'nim' => '2131740035',
+            'nim' => '2131740015',
             'semester' => '5',
             'kompen' => '3',
             'email' => '2131740015@gmail.com',
