@@ -18,7 +18,7 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-            <form action="{{ route('tugas.update', ['tuga' => $tugas->id]) }}" method="POST">
+          <form action="{{ route('tugas.update', $tugas->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -36,13 +36,6 @@
                   <option value="6" {{ $tugas->waktu == '6' ? 'selected' : '' }}>6</option>
                 </select>
               </div>
-            {{-- <div class="form-group">
-                <label for="status">Status</label>
-                <select name="status" id="status" class="form-control">
-                    <option value="available" {{ $tugas == 'available' ? 'selected' : '' }}>Available</option>
-                    <option value="unavailable" {{ $tugas == 'unavailable' ? 'selected' : '' }}>Unavailable</option>
-                </select>
-            </div> --}}
             <button type="submit" class="btn btn-primary">Update</button>
           </form>
         </div>

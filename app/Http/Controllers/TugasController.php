@@ -96,20 +96,26 @@ class TugasController extends Controller
      */
     public function update(Request $request, $id)
     {
-            
+    
+        $validatedData = $request->validate([
+            'tugas' => 'required|string|max:255',
+            'waktu' => 'required|integer|between:1,6',
+        ]);
+    
+    
         try {
             $tugas = Tugas::findOrFail($id);
-            
-            $tugas->update([
-                'tugas' => $request->tugas,
-                'waktu' => $request->waktu,
-                // 'status' => $request->status,
-            ]);
-
-            Alert::success('Berhasil', 'Tugas berhasil diperbarui');
-            return redirect()->route('tugas.index')->with('success', 'Data tugas berhasil diperbarui.');
+    
+            $updated = $tugas->update($validatedData);
+    
+            if ($updated) {
+                Alert::success('Berhasil', 'Tugas berhasil diperbarui');
+                return redirect()->route('tugas.index');
+            } else {
+                return redirect()->back()->withInput()->with('error', 'Gagal memperbarui tugas.');
+            }
         } catch (\Exception $e) {
-            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
 
