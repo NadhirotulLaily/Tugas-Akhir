@@ -172,7 +172,7 @@ class RekapController extends Controller
                       ->orWhere('nim', 'LIKE', "%{$query}%")
                       ->orWhere('semester', 'LIKE', "%{$query}%")
                       ->orWhere('kompen', 'LIKE', "%{$query}%")
-                      ->get();
+                      ->paginate(10);
 
         return view('rekap.index', compact('rekap'));
     }
