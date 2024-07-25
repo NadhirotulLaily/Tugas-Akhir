@@ -21,7 +21,7 @@ class RekapSeeder extends Seeder
             'nim' => '2131740041',
             'semester' => '6',
             'kompen' => '4',
-            'email' => '2131740041@gmail.com',
+            'email' => '2131740041@student.polinema.ac.id',
         ]);
 
         rekap::create([
@@ -29,7 +29,7 @@ class RekapSeeder extends Seeder
             'nim' => '2131740026',
             'semester' => '6',
             'kompen' => '2',
-            'email' => '2131740026@gmail.com',
+            'email' => '2131740026@student.polinema.ac.id',
         ]);
 
         Rekap::create([
@@ -37,7 +37,7 @@ class RekapSeeder extends Seeder
             'nim' => '2131740006',
             'semester' => '6',
             'kompen' => '6',
-            'email' => '2131740006@gmail.com',
+            'email' => '2131740006@student.polinema.ac.id',
         ]);
 
         Rekap::create([
@@ -45,7 +45,7 @@ class RekapSeeder extends Seeder
             'nim' => '2131740024',
             'semester' => '6',
             'kompen' => '1',
-            'email' => '2131740024@gmail.com',
+            'email' => '2131740024@student.polinema.ac.id',
         ]);
 
         Rekap::create([
@@ -53,7 +53,7 @@ class RekapSeeder extends Seeder
             'nim' => '2131740020',
             'semester' => '6',
             'kompen' => '8',
-            'email' => '2131740020@gmail.com',
+            'email' => '2131740020@student.polinema.ac.id',
         ]);
 
         Rekap::create([
@@ -61,7 +61,7 @@ class RekapSeeder extends Seeder
             'nim' => '2131740035',
             'semester' => '6',
             'kompen' => '6',
-            'email' => '2131740035@gmail.com',
+            'email' => '2131740035@student.polinema.ac.id',
         ]);
 
         Rekap::create([
@@ -69,7 +69,7 @@ class RekapSeeder extends Seeder
             'nim' => '2131740015',
             'semester' => '6',
             'kompen' => '3',
-            'email' => '2131740015@gmail.com',
+            'email' => '2131740015@student.polinema.ac.id',
         ]);
 
         Rekap::create([
@@ -93,7 +93,7 @@ class RekapSeeder extends Seeder
             'nim' => '2131740043',
             'semester' => '5',
             'kompen' => '8',
-            'email' => '2131740043@gmail.com',
+            'email' => '2131740043@student.polinema.ac.id',
         ]);
 
         Rekap::create([

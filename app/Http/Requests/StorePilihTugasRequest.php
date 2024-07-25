@@ -24,7 +24,7 @@ class StorePilihTugasRequest extends FormRequest
     public function rules()
     {
         return [
-            'bukti_tugas.*' => 'required|file|mimes:jpg,png,jpeg|max:2048'
+            'bukti_tugas.*' => 'required|file|mimes:jpg,png,jpeg,pdf,doc,docx|max:2048'
         ];
     }
 }

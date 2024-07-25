@@ -23,7 +23,19 @@
             <div class="card">
                 <div class="card-body text-center">
                     @if($tugasItem->bukti_tugas)
-                        <img src="{{ Storage::url('public/bukti_tugas/' . $tugasItem->bukti_tugas) }}" alt="{{ $tugasItem->tugas->tugas }}" class="img-fluid">
+                        @php
+                            $fileExtension = pathinfo($tugasItem->bukti_tugas, PATHINFO_EXTENSION);
+                        @endphp
+
+                        @if(in_array($fileExtension, ['jpg', 'png', 'jpeg']))
+                            <img src="{{ Storage::url('public/bukti_tugas/' . $tugasItem->bukti_tugas) }}" alt="{{ $tugasItem->tugas->tugas }}" class="img-fluid">
+                        @elseif(in_array($fileExtension, ['pdf']))
+                            <iframe src="{{ Storage::url('public/bukti_tugas/' . $tugasItem->bukti_tugas) }}" style="width: 100%; height: 500px;" frameborder="0"></iframe>
+                        @elseif(in_array($fileExtension, ['doc', 'docx']))
+                            <a href="{{ Storage::url('public/bukti_tugas/' . $tugasItem->bukti_tugas) }}" target="_blank">Lihat dokumen</a>
+                        @else
+                            <img src="{{ asset('storage/default.png') }}" alt="{{ $tugasItem->tugas->tugas }}" class="img-fluid">
+                        @endif
                     @else
                         <img src="{{ asset('storage/default.png') }}" alt="{{ $tugasItem->tugas->tugas }}" class="img-fluid">
                     @endif
